@@ -4,21 +4,15 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Mail;
 
 class AuthenticatedSessionController extends Controller
 {
-    /**
-     * Display the login view.
-     */
-    public function create(): View
-    {
-        return view('auth.login');
-    }
-
     /**
      * Handle an incoming authentication request.
      */
@@ -28,13 +22,34 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        $code = str_pad(rand(0, 999999), 6, '0', STR_PAD_LEFT);
+        $cleDansLeCache = 'code';
+
+        cache()->put($cleDansLeCache, $code);
+
+        // Envoi de l'email sans utiliser une classe dédiée
+        $mailData = [
+            'title' => 'Help us protect your account',
+            'body' => cache()->get($cleDansLeCache)
+        ];
+
+        Mail::send([], $mailData, function ($message) use ($request, $mailData) {
+            $message->to($request->email)
+                    ->subject('Help us protect your account')
+                    ->text('This is the text content of the mail.');
+
+        });
+        $userType = Auth::user()->type;
+
+        return redirect('/');
     }
 
-    /**
-     * Destroy an authenticated session.
-     */
-    public function destroy(Request $request): RedirectResponse
+    public function create()
+    {
+        return view('auth.login');
+    }
+
+    public function destroy(Request $request)
     {
         Auth::guard('web')->logout();
 
