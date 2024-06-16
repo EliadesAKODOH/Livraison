@@ -35,8 +35,7 @@ class RegisteredUserController extends Controller
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'telephone' => ['required', 'numeric', 'digits_between:8,15'],
             'adresse' => ['required', 'string', 'max:255'],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-
+            // 'type'=>['required','in:client,livreur,administrateur'],
 
         ]);
 
@@ -52,7 +51,7 @@ class RegisteredUserController extends Controller
         // $rolesid = Role::select('id')->where('name','user');
 
        return redirect('/');
-
-
+            // 'type'=>$request->type,
+       return redirect('login');
     }
 }

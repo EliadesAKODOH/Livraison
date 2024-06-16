@@ -39,7 +39,7 @@ class UserController extends Controller
         'adresse'=> ['required'],
         ]);
         User::create($request->all());
-        return redirect('/')->width('succes','Utilisateur créer avec succès');
+        return redirect()->route('user.index')->with('succes','Utilisateur créer avec succès');
     }
 
     /**
@@ -47,8 +47,9 @@ class UserController extends Controller
      */
     public function show(string $id )
     {
-        $user= User::all();
-        return view('user.show');
+    $user = User::findOrFail($id);
+    return view('user.show', compact('user'));
+       
     }
 
     /**
@@ -62,7 +63,7 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id )
+    public function update(Request $request, User $user )
     {
         $request->validate([
             'nom'=> ['required'],
@@ -71,17 +72,18 @@ class UserController extends Controller
             'telephone'=> ['required'],
             'adresse'=> ['required'],
             ]);
-            User::updated($request->all());
-            return redirect('/')->width('succes','Utilisateur modifié avec succès');
+            // dd($request->all());
+            $user->update($request->all());  
+          return redirect()->route('user.index')->with('succes','Utilisateur modifié avec succès');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $user)
     {
-        $user = User::findOrFail($id);
+        
         $user->delete();
-        return redirect('/')->width('succes','Utilisateur supprimé avec succès');
+        return redirect()->route('user.index')->with('succes','utilisateur supprimé avec succès');
     }
 }

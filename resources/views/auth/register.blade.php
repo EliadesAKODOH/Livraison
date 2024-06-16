@@ -27,14 +27,15 @@
             <x-input-error :messages="$errors->get('adresse')" class="mt-2" />
         </div>
              <!-- Type -->
-        {{-- <div class="mt-4">
+        <!-- <div class="mt-4">
             <x-input-label for="type" :value="__('Type')" />
             <select id="type" name="type" class="block mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                <option value="client">Client</option>
                 <option value="livreur">Livreur</option>
                 <option value="administrateur">Administrateur</option>
             </select>
             <x-input-error :messages="$errors->get('type')" class="mt-2" />
-        </div> --}}
+        </div> -->
         <!-- Password -->
         <div class="mt-4">
             <x-input-label for="password" :value="__('Mot de passe')" />

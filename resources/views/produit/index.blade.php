@@ -3,13 +3,25 @@
 
     <!-- Layout wrapper -->
 
-    <a href=""> <button class="btn btn-primary mt-3"> Ajouter un produit </button> </a>
-                <table class="table table-bordered table-hover table-striped mt-3">
+    <div class="d-flex justify-content-end m-2">
+<a href="{{ route('produit.create') }}" class="btn btn-primary"> 
+  Ajouter Produit
+</a>
+</div>
+
+@if(session('succes'))
+
+  <div class="alert alert-success">{{session('succes')}}</div>
+
+@endif
+
+
+                <table class="table table-bordered table-hover table-striped m-3">
                   <thead>
                     <tr>
-                      <td>N°</td>
+                      <td>Image</td>
                       <td>Nom</td>
-                      <td>Détail</td>
+                      <td>Description</td>
                       <td>Catégorie</td>
                       <td>Prix</td>
                       <td>Action</td>
@@ -18,16 +30,26 @@
                  <tbody>
                     @foreach ($produits as $produit)
                     <tr>
-                      <th> {{$produit->id}} </th>
+                    <th>
+                     <img src="{{ asset('storage/' . $produit->image) }}" alt="{{ $produit->nom }}" style="width: 200px; height: 200px;">
+                    </th>
                       <th> {{$produit->nom}} </th>
-                      <th> {{$produit->detail}} </th>
-                      <th> {{$produit->categorie}} </th>
-                      <th> {{$produit->prix}} </th>
-                      <th class="" style="width: 320px;">
-                      <a href="" class="btn btn-primary">Modifier</a>
-                      <a href="" class="btn btn-danger">Supprimer</a>
-                      <a href="" class="btn btn-success">Voir</a>
+                      <th> {{$produit->description}} </th>
+                      <th>
+                        
+                       {{$produit->categorie ? $produit->categorie->nom : "RAS"}}
+                       
                       </th>
+                      <th> {{$produit->prix}} </th>
+                      <th style="width: 320px;">
+          <a href="{{ route('produit.edit',['produit' => $produit->id]) }}" class="btn btn-primary">Modifier</a>
+          <form action="{{ route('produit.destroy',['produit' => $produit->id]) }}" method="POST" style="display: inline;">
+              @csrf
+              @method('DELETE')
+              <button type="submit" class="btn btn-danger">Supprimer</button>
+          </form>
+          <a href="{{ route('produit.show', $produit->id) }}" class="btn btn-success">Voir</a>
+        </th>
                     </tr>
                     @endforeach
                   </tbody> 

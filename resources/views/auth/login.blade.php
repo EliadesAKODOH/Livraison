@@ -38,7 +38,6 @@
                     {{ __('Mot de passe oublié?') }}
                 </a>
             @endif
-            
             <x-primary-button class="ms-3" href="{{ route('password.request')}}">
                 {{ __('Se connecter') }}
             </x-primary-button>

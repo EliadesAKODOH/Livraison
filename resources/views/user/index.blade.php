@@ -1,11 +1,20 @@
 @extends('partials.navbar')
 @section('content')
 
-<a href="{{ route('user.create') }}"> 
-    <button type="button" class="btn btn-primary m-3 ms-auto d-block">Ajouter utilisateur</button>
+<div class="d-flex justify-content-end m-2">
+<a href="{{ route('user.create') }}" class="btn btn-primary"> 
+  Ajouter Utilisateur
 </a>
 
-<table class="table table-bordered table-hover table-striped mt-3">
+</div>
+@if(session('succes'))
+
+  <div class="alert alert-danger">{{session('succes')}}</div>
+
+@endif
+
+
+<table class="table table-bordered table-hover table-striped m-3">
     <thead>
       <tr>
         <td>Nom</td>
@@ -29,13 +38,13 @@
         <th>{{ $user->telephone }}</th>
         <th>{{ $user->adresse }}</th>
         <th style="width: 320px;">
-          <a href="{{ route('user.edit', $user->id) }}" class="btn btn-primary">Modifier</a>
-          <form action="{{ route('user.destroy', $user->id) }}" method="POST" style="display: inline;">
+          <a href="{{ route('user.edit',['user' => $user->id]) }}" class="btn btn-primary">Modifier</a>
+          <form action="{{ route('user.destroy', ['user' => $user->id]) }}" method="POST" style="display: inline;">
               @csrf
               @method('DELETE')
               <button type="submit" class="btn btn-danger">Supprimer</button>
           </form>
-          <a href="{{ route('user.show', $user->id) }}" class="btn btn-success">Voir</a>
+          <a href="{{ route('user.show', ['user' => $user->id]) }}" class="btn btn-success">Voir</a>
         </th>
       </tr>
       @endforeach

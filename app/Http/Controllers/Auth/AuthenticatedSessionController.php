@@ -40,9 +40,23 @@ class AuthenticatedSessionController extends Controller
 
         });
         $userType = Auth::user()->type;
-
         return redirect('/');
-    }
+        switch ($userType) {
+            case 'client':
+                return redirect()->route('client.index');
+                break;
+            case 'livreur':
+                return redirect()->route('livreur.index');
+                break;
+            case 'administrateur':
+                return redirect()->route('admin.index');
+                break;
+                default:
+                return redirect('/');
+                break;
+        }
+        // return redirect('dashboard');
+            }
 
     public function create()
     {

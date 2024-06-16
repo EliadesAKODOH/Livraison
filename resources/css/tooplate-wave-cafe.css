@@ -1,11 +1,3 @@
-/*
-
-Tooplate 2121 Wave Cafe
-
-https://www.tooplate.com/view/2121-wave-cafe
-
-*/
-
 html { scroll-behavior: smooth; }
 
 body {
@@ -25,7 +17,7 @@ ul {
 nav > ul > li { list-style: none; }
 
 a { 
-	color: #3CF;
+    color: #3CF;
     text-decoration: none;
     transition: all 0.3s ease; 
 }
@@ -61,15 +53,21 @@ h2 { margin-top: 0; }
 
 .tm-row {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
 }
 
 .tm-left,
 .tm-right {
-    width: 50%;
+    flex: 1;
+    padding: 10px;
 }
 
-.tm-left-inner { position: fixed; }
+.tm-left-inner { 
+    position: relative;
+    max-width: 500px;
+    width: 100%;
+}
 
 .tm-site-header {
     background-color: white;
@@ -88,11 +86,6 @@ h2 { margin-top: 0; }
     font-style: italic;    
 }
 
-.tm-left-inner {
-    max-width: 500px;
-    width: 100%;
-}
-
 .tm-site-nav-ul {
     display: flex;
     flex-wrap: wrap;
@@ -102,14 +95,17 @@ h2 { margin-top: 0; }
 .tm-page-nav-item { margin-top: 20px; }
 
 .tm-page-link {
-    min-width: 240px;
+    flex: 1;
+    min-width: 200px;
     height: 100px;
     background-color: white;
     color: #099;
     display: flex;
     text-decoration: none;
     align-items: center;      
+    justify-content: center;
     font-size: 1.2rem;
+    margin: 10px;
 }
 
 .tm-page-link:hover,
@@ -119,8 +115,7 @@ h2 { margin-top: 0; }
 }
 
 .tm-page-link-icon {
-    margin-right: 25px;
-    margin-left: 25px;
+    margin-right: 10px;
     font-size: 1.5rem;
 }
 
@@ -139,11 +134,13 @@ h2 { margin-top: 0; }
     border-bottom: 3px solid transparent;
 }
 
-.tm-drinks-nav { height: 80px; }
-.tm-main { max-width: 660px; }
+.tm-drinks-nav { height: auto; }
+
+.tm-main { max-width: 100%; }
 
 .tm-drinks-nav > ul {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: space-around;
     height: 100%;
@@ -157,9 +154,12 @@ h2 { margin-top: 0; }
 
 .tm-list-item {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
     margin-top: 20px;
+    background-color: azure;
+    padding: 10px;
 }
 
 .tm-list-item-2 { align-items: flex-start; }
@@ -191,6 +191,7 @@ h2 { margin-top: 0; }
 }
 
 .tm-list-item-price { color: #96FEFF; }
+
 .tm-site-footer { margin-top: 15px; }
 
 .tm-footer-text {
@@ -199,6 +200,7 @@ h2 { margin-top: 0; }
 }
 
 .tm-footer-link { color: white; }
+
 .tm-tab-content { animation: fadeEffect 1s; }
 .tm-page-content { animation: fadeEffect 1s; }
 
@@ -219,7 +221,7 @@ h2 { margin-top: 0; }
 /* About */
 .tm-about-box-1 { padding: 40px 30px 50px 0; }
 .tm-about-box-2 { padding: 50px 40px 30px; }
-.tm-about-header { margin-left: 220px; }
+.tm-about-header { margin-left: 0; }
 
 /* Special */
 .tm-special-items {
@@ -229,7 +231,7 @@ h2 { margin-top: 0; }
 }
 
 .tm-special-item {
-    max-width: 320px;
+    max-width: 100%;
     margin: 30px 10px;
 }
 
@@ -243,7 +245,7 @@ h2 { margin-top: 0; }
 }
 
 .tm-contact-form-container {
-    max-width: 460px;
+    max-width: 100%;
     padding: 40px 50px;
     box-sizing: border-box;
 }
@@ -255,7 +257,7 @@ h2 { margin-top: 0; }
     box-sizing: border-box;
     width: 100%;
     padding: 15px;
-	font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+    font-family: 'Open Sans', Arial, Helvetica, sans-serif;
     font-size: 1rem;
     line-height: 1.5;
     color: #fff;
@@ -292,6 +294,7 @@ h2 { margin-top: 0; }
 
 .tm-mb-30 { margin-bottom: 30px; }
 
+/* Responsive Styles */
 @media (max-width: 1130px) and (min-width: 992px) {
     .tm-left-inner { max-width: 380px; }
     .tm-site-name { font-size: 2.6rem; }
@@ -337,25 +340,5 @@ h2 { margin-top: 0; }
 
 @media (max-width: 479px) {
     .tm-site-name { font-size: 2.6rem; }
-    .tm-site-logo { margin-right: 20px; }
-
-    .tm-list-item {
-        flex-direction: column;
-        margin-top: 40px;     
-    }
-
-    .tm-list-item-img {
-        margin-right: 0;
-        margin-bottom: 15px;        
-    }
-
-    .tm-drinks-nav { height: auto; }
-
-    .tm-drinks-nav > ul {
-        flex-direction: column;
-        padding: 15px;
-    }
-
-    .tm-drinks-nav > ul > li { margin-bottom: 10px; }
-    .tm-drinks-nav > ul > li > a { display: block; }
+   
 }
