@@ -230,7 +230,7 @@
 
 <ul class="nav nav-pills nav-sidebar flex-column mt-3" data-widget="treeview" role="menu" data-accordion="false">
         <li class="nav-item menu-open">
-          <a href="{{route('produit.index')}}" class="nav-link active"  >
+          <a href="{{route('livreur.index')}}" class="nav-link active"  >
             <i class="nav-icon fas fa-utensils"></i>
               Gestion des livreurs
             </a>

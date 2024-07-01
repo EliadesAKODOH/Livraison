@@ -50,23 +50,28 @@ class ProduitController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'image' => ['required', 'image'],
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'nom' => ['required'],
             'description' => ['required'],
             'prix' => ['required', 'numeric'],
             'categorie' => ['required', 'exists:categories,id']
         ]);
 
-        $image = $request->file('image');
-        $imagePath = $image->store('images');
+        //$image = $request->file('image');
+        $imagePath = null;
         // dd( $imagePath);
 
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('uploads', 'public');
+        }
+
         Produit::create([
+            'image' => $imagePath,
             'nom' => $request->nom,
             'description' => $request->description,
             'prix' => $request->prix,
             'categorie_id' => $request->categorie,
-            'image' => $imagePath
+            
         ]);
 
         return redirect()->route('produit.index')->with('succes', 'Produit ajouté avec succès');

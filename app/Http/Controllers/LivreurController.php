@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Livreur;
 use Illuminate\Http\Request;
 
 class LivreurController extends Controller
@@ -11,7 +12,8 @@ class LivreurController extends Controller
      */
     public function index()
     {
-        //
+        $livreurs = Livreur::all();
+        return view('livreur.index',compact('livreurs'));
     }
 
     /**
@@ -19,7 +21,7 @@ class LivreurController extends Controller
      */
     public function create()
     {
-        //
+        return view("livreur.create");
     }
 
     /**
@@ -27,7 +29,14 @@ class LivreurController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nom' => 'required|string|max:255',
+            'email' => 'required|email|unique:livreurs,email',
+            'telephone' => 'required|string|max:20',
+            'adresse' => 'required|string|max:255',
+            ]);
+            Livreur::create($request->all());
+            return redirect()->route('livreur.index')->with('succes','Livreur créer avec succès');
     }
 
     /**
@@ -35,7 +44,8 @@ class LivreurController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $user = Livreur::findOrFail($id);
+    return view('livreur.show');
     }
 
     /**
@@ -43,7 +53,7 @@ class LivreurController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('livreur.edit');
     }
 
     /**
@@ -51,7 +61,15 @@ class LivreurController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'nom' => 'required|string|max:255',
+            'email' => 'required|email|unique:livreurs,email',
+            'telephone' => 'required|string|max:20',
+            'adresse' => 'required|string|max:255',
+            ]);
+            // dd($request->all());
+            $livreur->update($request->all());  
+          return redirect()->route('livreur.index')->with('succes','Livreur modifié avec succès');
     }
 
     /**
@@ -59,6 +77,7 @@ class LivreurController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $livreur->delete();
+        return redirect()->route('livreur.index')->with('succes','Livreur supprimé avec succès');
     }
 }

@@ -16,10 +16,21 @@ class Produit extends Model
       'prix',
     ];
 
-    public function categorie()
+    public function categories()
     {
       
        return $this->belongsTo(Categorie::class);
 
+    }
+    public function supermarches()
+    {
+      
+       return $this->belongsTo(supermarche::class);
+
+    }
+
+    public function paniers()
+    {
+      return $this->belonceTomany(Panier::class);
     }
 }

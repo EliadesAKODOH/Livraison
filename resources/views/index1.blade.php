@@ -1,5 +1,5 @@
-@extends('layouts/myapp')
-
+@extends('partials.navbar')
 @section('content')
+
 
 @endsection

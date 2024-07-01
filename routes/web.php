@@ -10,7 +10,8 @@ use App\Http\Controllers\RegisteredUserController;
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
-
+use App\Http\Controllers\Auth\RegisteredUserController as AuthRegisteredUserController;
+use App\Http\Controllers\LivreurController;
 
 Route::get('/', function () {
     return view('home');
@@ -27,6 +28,7 @@ Route::get('/dashboard', function () {
 
 Route::resource('user', UserController::class);
 Route::resource('produit', ProduitController::class);
+Route::resource('livreur', LivreurController::class);
 Route::get('/client',[ProduitController::class, 'clientSide'])->name('client.index');
 
 
