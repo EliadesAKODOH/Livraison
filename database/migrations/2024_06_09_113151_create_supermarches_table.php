@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('nom_sup');
             $table->string('email_sup');
-            $table->integer('num_sup');
             $table->string('adresse_sup');
             $table->string('image_sup');
             $table->timestamps();

@@ -17,7 +17,9 @@ return new class extends Migration
             $table->string('nom');
             $table->longText('description');
             $table->integer('prix');
+            $table->boolean('en_stock');
             $table->foreignId('categorie_id')->constrained()->onDelete('cascade');
+            $table->foreignId('supermarche_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

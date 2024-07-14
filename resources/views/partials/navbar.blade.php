@@ -202,9 +202,17 @@
       <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column mt-3" data-widget="treeview" role="menu" data-accordion="false">
         <li class="nav-item menu-open">
-          <a href="{{route('produit.index')}}" class="nav-link active"  >
+          <a href="{{route('supermarche.index')}}" class="nav-link active"  >
             <i class="nav-icon fas fa-utensils"></i>
               Gestion des supermarchés
+            </a>
+        </li>
+      </ul>
+      <ul class="nav nav-pills nav-sidebar flex-column mt-3" data-widget="treeview" role="menu" data-accordion="false">
+        <li class="nav-item menu-open">
+          <a href="{{route('categorie.index')}}" class="nav-link active"  >
+            <i class="nav-icon fas fa-utensils"></i>
+              Gestion des catégories
             </a>
         </li>
       </ul>
@@ -239,8 +247,8 @@
 
       <ul class="nav nav-pills nav-sidebar flex-column mt-4" data-widget="treeview" role="menu" data-accordion="false">
         <li class="nav-item menu-open">
-          <a href="{{route('produit.index')}}" class="nav-link active"  >
-            <i class="nav-icon fas fa-utensils "></i>
+          <a href="{{route('user.index')}}" class="nav-link active"  >
+            <i class="nav-icon fas fa-utensils"></i>
               Gestion des administrateurs
             </a>
         </li>

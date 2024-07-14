@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Support\Facades\Hash; 
-
+use App\Models\Supermarche;
 use App\Models\User;
 use App\Models\Role;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -23,12 +23,30 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
+      
+
+        $admin =  Role::create([
+          'name'=>'admin'
+          ]);
+         $client =  Role::create([
+           'name'=>'client'
+           ]);
+         $livreur =  Role::create([
+               'name'=>'livreur'
+               ]);
+         $supermarche =  Role::create([
+               'name'=>'supermarche'
+               ]);
+
+
         $precieuse = User::create([
          'nom'=>'Precious',
           'email'=>'precious@gmail.com',
           'adresse'=>'Amerique',
           'telephone'=>'95555555',
           'password'=>Hash::make('password'),
+          'role_id'=> 1,
+          'supermarche_id' => 1  
         ]);
         $aureano = User::create([
             'nom'=>'Auréano',
@@ -36,6 +54,8 @@ class DatabaseSeeder extends Seeder
              'adresse'=>'Paris',
              'telephone'=>'95555556',
              'password'=>Hash::make('password'),
+             'role_id'=> 2,
+             'supermarche_id' => 1  
            ]);
            $janvier = User::create([
             'nom'=>'Janvier',
@@ -43,21 +63,20 @@ class DatabaseSeeder extends Seeder
              'adresse'=>'New York',
              'telephone'=>'95401515',
              'password'=>Hash::make('password'),
+             'role_id'=> 3,
+             'supermarche_id' => 1  
+           ]);
+           $miracle = User::create([
+            'nom'=>'Miracle',
+             'email'=>'miracle@gmail.com',
+             'adresse'=>'Mexique',
+             'telephone'=>'41188804',
+             'password'=>Hash::make('password'),
+             'role_id'=> 4,
+             'supermarche_id' => 1  
            ]);
 
-           Role::create([
-           'name'=>'admin'
-           ]);
-           Role::create([
-            'name'=>'client'
-            ]);
-            Role::create([
-                'name'=>'livreur'
-                ]);
-            
-            $precieuse->roles()->attach([1]);
-            
-            $janvier->roles()->attach([2,3]);
-            $aureano->roles()->attach([2]);
+          
+          
     }
 }

@@ -6,6 +6,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProduitController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\SupermarcheController;
+use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\RegisteredUserController;
 
 use Illuminate\Support\Facades\Route;
@@ -28,7 +30,9 @@ Route::get('/dashboard', function () {
 
 Route::resource('user', UserController::class);
 Route::resource('produit', ProduitController::class);
+Route::resource('supermarche', SupermarcheController::class);
 Route::resource('livreur', LivreurController::class);
+Route::resource('categorie', CategorieController::class);
 Route::get('/client',[ProduitController::class, 'clientSide'])->name('client.index');
 
 

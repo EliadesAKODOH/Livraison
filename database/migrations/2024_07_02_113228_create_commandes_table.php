@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('historique_commande');
             $table->foreignId('produit_id')->constrained()->onDelete('cascade');
             $table->foreignId('panier_id')->constrained()->onDelete('cascade');
+            $table->foreignId('livraison_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

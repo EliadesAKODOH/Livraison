@@ -1,6 +1,5 @@
 @extends('partials.navbar')
 @section('content')
-
 <div class="d-flex justify-content-end m-2">
 <a href="{{ route('user.create') }}" class="btn btn-primary"> 
   Ajouter Utilisateur
@@ -30,7 +29,7 @@
       <tr>
         <th>{{ $user->nom }}</th>
         <th>
-          @foreach($user->roles as $role)
+          @foreach($user->role() as $role)
            {{ $role->name }}
           @endforeach
         </th>

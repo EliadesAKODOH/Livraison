@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Categorie;
 
 class CategorieController extends Controller
@@ -13,7 +13,7 @@ class CategorieController extends Controller
     public function index()
     {
         $categories=Categorie::all();
-        return view('client.index', compact('categories'));
+        return view('categorie.index', compact('categories'));
     }
 
     /**
@@ -21,19 +21,24 @@ class CategorieController extends Controller
      */
     public function create()
     {
-        return view('client.index');
+        return view('categorie.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, Categorie $categorie)
+    public function store(Request $request)
     {
+        
         $request->validate([
            'nom'=>['required'],
         ]);
-        Categorie::create($request->all());
-      return redirect()->route('client.index')->with('succes','Categorie ajouté avec succès');
+        Categorie::create([
+            'nom'=>$request->nom,
+            'supermarche_id'=> Auth::user()->supermarche_id
+        ]);
+
+      return redirect()->route('categorie.index')->with('succes','Categorie ajouté avec succès');
     }
 
     /**
@@ -43,29 +48,27 @@ class CategorieController extends Controller
     {
         $categorie = Categorie::findOrFail($id);
         
-       return view('client.index', compact('categorie'));
+       return view('categorie.show', compact('categorie'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        return view('client.index', compact('categorie'));
-    }
+    public function edit($id)
+{
+    $categorie = Categorie::find($id);
+    return view('categorie.edit', compact('categorie'));
+}
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Categorie $categorie)
-    {
-        $request->validate([
-            'nom'=>['required'],
-         ]);
-         Categorie::update($request->all());
-       return redirect()->route('client.index')->with('succes','Categorie ajouté avec succès');
-    }
+public function update(Request $request, $id)
+{
+    $request->validate([
+        'nom' => 'required|string|max:255',
+    ]);
 
+    $categorie = Categorie::find($id);
+    $categorie->nom = $request->nom;
+    $categorie->save();
+
+    return redirect()->route('categories.index')->with('success', 'Catégorie mise à jour avec succès');
+}
     /**
      * Remove the specified resource from storage.
      */

@@ -5,7 +5,7 @@
         <div class="col-md-6">
             <div class="card">
                 <div class="card-header text-center">
-                    <h3>Créer un nouvel utilisateur</h3>
+                    <h3>Créer un  utilisateur</h3>
                 </div>
                 <div class="card-body">
                     <form action="{{ route('user.store') }}" method="POST">

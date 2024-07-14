@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('livraisons', function (Blueprint $table) {
             $table->id();
             $table->date('date_livraison');
-            $table->datetime('heure_livraison');
-            $table->foreignId('commande_id')->constrained()->onDelete('cascade');
+            $table->string('destination');
+            $table->datetime('heure_depart');
+            $table->datetime('heure_arrivee');
             $table->foreignId('livreur_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });

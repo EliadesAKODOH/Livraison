@@ -57,9 +57,7 @@ class ProduitController extends Controller
             'categorie' => ['required', 'exists:categories,id']
         ]);
 
-        //$image = $request->file('image');
         $imagePath = null;
-        // dd( $imagePath);
 
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('uploads', 'public');
@@ -83,7 +81,7 @@ class ProduitController extends Controller
     public function show(string $id)
     {
         $produit = Produit::findOrFail($id);
-       // dd($produit->image);
+     
         return view('produit.show', compact('produit'));
     }
 
@@ -119,29 +117,6 @@ class ProduitController extends Controller
         'categorie_id' => $request->categorie,
         'image' => $imagePath
     ]);
-
-
-    // {
-    //     $request->validate([
-    //         'image' => ['image'],
-    //         'nom' => ['required'],
-    //         'description' => ['required'],
-    //         'prix' => ['required', 'numeric'],
-    //         'categorie_id' => ['required', 'exists:categories,id']
-    //     ]);
- 
-    //     if ($request->hasFile('image')) {
-    //         $image = $request->file('image');
-    //         $imagePath = $image->store('images', 'public');
-    //         $produit->image = $imagePath;
-    //     }
-
-    //     $produit->nom = $request->nom;
-    //     $produit->description = $request->description;
-    //     $produit->prix = $request->prix;
-    //     $produit->categorie_id = $request->categorie_id;
-
-    //     $produit->save();
 
         return redirect()->route('produit.index')->with('succes', 'Produit modifié avec succès');
     }

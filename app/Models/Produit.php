@@ -16,7 +16,7 @@ class Produit extends Model
       'prix',
     ];
 
-    public function categories()
+    public function categorie()
     {
       
        return $this->belongsTo(Categorie::class);
@@ -31,6 +31,6 @@ class Produit extends Model
 
     public function paniers()
     {
-      return $this->belonceTomany(Panier::class);
+      return $this->belongsToMany(Panier::class);
     }
 }

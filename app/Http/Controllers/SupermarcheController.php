@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Supermarche;
 
 class SupermarcheController extends Controller
 {
@@ -11,54 +12,106 @@ class SupermarcheController extends Controller
      */
     public function index()
     {
-        //
+        $supermarches = Supermarche::all();
+        return view('supermarche.index', compact('supermarches'));
     }
-
     /**
-     * Show the form for creating a new resource.
+     * Montrer le formulaire pour créer une nouvelle ressource.
      */
     public function create()
     {
-        //
+        return view('supermarche.create');
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Stocker une ressource nouvellement créée dans le stockage.
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nom_sup' => ['required','max:20'],
+            'email_sup' => ['required','email','string','unique:'.Supermarche::class],
+            'adresse_sup' => ['required'],
+            'image_sup' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        
+
+        $imagePath = null;
+        if ($request->hasFile('image_sup')) {
+            $imagePath = $request->file('image_sup')->store('uploads', 'public');
+        }
+
+        $image = $request->file('image_sup');
+        $imagePath = $image->store('images','public');
+
+
+
+
+        Supermarche::create([
+            'nom_sup' => $request->nom_sup,
+            'email_sup' => $request->email_sup,
+            'adresse_sup' => $request->adresse_sup,
+            'image_sup' =>  $imagePath,
+          
+            
+        ]);
+        
+
+        return redirect()->route('supermarche.index')->with('succes', 'Supermarché ajouté avec succès');
     }
 
     /**
-     * Display the specified resource.
+     * Afficher la ressource spécifiée.
      */
     public function show(string $id)
     {
-        //
+        $supermarche = Supermarche::findOrFail($id);
+       // dd($supermarche->image);
+        return view('supermarche.show', compact('supermarche'));
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Montrer le formulaire pour éditer la ressource spécifiée.
      */
-    public function edit(string $id)
+    public function edit(Supermarche $supermarche)
     {
-        //
+        $supermarche = Supermarche::all();
+        return view('supermarche.edit', compact('supermarche'));
     }
 
     /**
-     * Update the specified resource in storage.
+     * Mettre à jour la ressource spécifiée dans le stockage.
      */
-    public function update(Request $request, string $id)
-    {
-        //
+    public function update(Request $request, Supermarche $supermarche)
+     { 
+        $request->validate([
+        'nom_sup' => ['required'],
+        'email_sup' => ['required'],
+        'adresse_sup' => ['required'],
+        'image_sup' => ['required', 'image'],
+    ]);
+
+    $image = $request->file('image');
+    $imagePath = $image->store('images','public');
+
+     Supermarche::create([
+        'nom_sup' => $request->nom,
+        'email_sup' => $request->email,
+        'adresse_sup' => $request->adresse,
+        'image_sup' => $imagePath
+        
+    ]);
+
+        return redirect()->route('supermarche.index')->with('succes', 'supermarche modifié avec succès');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Supprimer la ressource spécifiée du stockage.
      */
-    public function destroy(string $id)
+    public function destroy(Supermarche $supermarche)
     {
-        //
+        $supermarche->delete();
+        return redirect()->route('supermarche.index')->with('succes', 'supermarche supprimé avec succès');
     }
 }

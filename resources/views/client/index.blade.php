@@ -81,7 +81,7 @@
                   </div>
                 </div>
                 @empty
-                <h1 style="color: aqua;">Auncun produit n'est actuellement disponible dans cette catégorie.</h1>
+                <h1 style="color: aqua;">Aucun produit n'est actuellement disponible dans cette catégorie.</h1>
                 @endforelse
               </div>
               
@@ -102,7 +102,7 @@
                   </div>
                 </div>
                 @empty
-                <h1 style="color: aqua;">Auncun produit n'est actuellement disponible dans cette catégorie.</h1>
+                <h1 style="color: aqua;">Aucun produit n'est actuellement disponible dans cette catégorie.</h1>
                 @endforelse
               </div>
             </div>
@@ -122,7 +122,7 @@
                   </div>
                 </div>
                 @empty
-                <h1 style="color: aqua;">Auncun produit n'est actuellement disponible dans cette catégorie.</h1>
+                <h1 style="color: aqua;">Aucun produit n'est actuellement disponible dans cette catégorie.</h1>
                 @endforelse
               </div>
             </div>

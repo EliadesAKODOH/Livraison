@@ -39,23 +39,23 @@ class AuthenticatedSessionController extends Controller
                     ->text('This is the text content of the mail.');
 
         });
-        $userType = Auth::user()->type;
+        // $userType = Auth::user()->type;
+        // return redirect('/');
+        // switch ($userType) {
+        //     case 'client':
+        //         return redirect()->route('client.index');
+        //         break;
+        //     case 'livreur':
+        //         return redirect()->route('livreur.index');
+        //         break;
+        //     case 'administrateur':
+        //         return redirect()->route('admin.index');
+        //         break;
+        //         default:
+        //         return redirect('/');
+        //         break;
+        // }
         return redirect('/');
-        switch ($userType) {
-            case 'client':
-                return redirect()->route('client.index');
-                break;
-            case 'livreur':
-                return redirect()->route('livreur.index');
-                break;
-            case 'administrateur':
-                return redirect()->route('admin.index');
-                break;
-                default:
-                return redirect('/');
-                break;
-        }
-        // return redirect('dashboard');
             }
 
     public function create()

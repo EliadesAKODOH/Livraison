@@ -2,7 +2,7 @@
 @section('content')
 
 <div class="d-flex justify-content-end m-2">
-<a href="{{ route('user.create') }}" class="btn btn-primary"> 
+<a href="{{ route('livreur.create') }}" class="btn btn-primary"> 
   Ajouter Livreur
 </a>
 
@@ -21,6 +21,7 @@
         <td>Email</td>
         <td>Téléphone</td>
         <td>Adresse</td>
+        <td>Statut</td>
         <td>Action</td>
       </tr>
     </thead>
@@ -31,6 +32,7 @@
         <th>{{ $livreur->email }}</th>
         <th>{{ $livreur->telephone }}</th>
         <th>{{ $livreur->adresse }}</th>
+        <th>{{ $livreur->statut }}</th>
         <th style="width: 320px;">
           <a href="{{ route('livreur.edit',['livreur' => $livreur->id]) }}" class="btn btn-primary">Modifier</a>
           <form action="{{ route('livreur.destroy', ['livreur' => $livreur->id]) }}" method="POST" style="display: inline;">

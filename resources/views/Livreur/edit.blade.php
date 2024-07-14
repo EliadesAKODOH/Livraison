@@ -5,7 +5,7 @@
 <form action="{{route('livreur.update', ['livreur' => $livreur->id])}}" method="POST">
     @csrf
     @method('put')
-    <input type="text" name="nom" value="{{$livreur->nom}}" class="m-2"><br>
+    <input type="text" name="nom_liv" value="{{$livreur->nom}}" class="m-2"><br>
     @error('nom') 
     <p>{{$message}}</p>
     @enderror

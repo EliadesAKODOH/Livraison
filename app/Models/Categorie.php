@@ -12,12 +12,17 @@ class Categorie extends Model
     use HasFactory;
 
     protected $fillable =[
-     'nom'
+     'nom',
+     'supermarche_id'
     ];
 
     public function produits()
     {
        return $this->hasMany(Produit::class);
+    }
+    public function supermarche()
+    {
+       return $this->belongsTo(Supermarche::class);
     }
 
     

@@ -19,9 +19,8 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->integer('telephone');
             $table->string('adresse');
-            $table->string('destination');
-            $table->datetime('heure_depart');
-            $table->datetime('heure_arrivee');
+            $table->string('statut');
+ 
             $table->timestamps();
         });
     }

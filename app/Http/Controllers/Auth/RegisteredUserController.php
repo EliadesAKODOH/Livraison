@@ -35,6 +35,7 @@ class RegisteredUserController extends Controller
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'telephone' => ['required', 'numeric', 'digits_between:8,15'],
             'adresse' => ['required', 'string', 'max:255'],
+            'role_id' => ['required', 'numeric']
             // 'type'=>['required','in:client,livreur,administrateur'],
 
         ]);
@@ -45,10 +46,10 @@ class RegisteredUserController extends Controller
             'telephone'=>$request->telephone,
             'adresse'=>$request->adresse,
             'password' => Hash::make($request->password),
+            'role_id' => 2
 
         ]);
 
-        // $rolesid = Role::select('id')->where('name','user');
 
        return redirect('/');
             // 'type'=>$request->type,
