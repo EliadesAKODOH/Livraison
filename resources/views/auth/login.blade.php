@@ -4,6 +4,7 @@
 
     <form method="POST" action="{{ route('login') }}">
         @csrf
+        <h2 style="text-align: center; font-size:1.5rem; font-weight:bold; margin-bottom:30px; color:rgb(73, 72, 72);" >CONNEXION</h2>
 
         <!-- Email Address -->
         <div>
@@ -41,7 +42,7 @@
             <x-primary-button class="ms-3" href="{{ route('password.request')}}">
                 {{ __('Se connecter') }}
             </x-primary-button>
-            
+
         </div>
     </form>
 </x-guest-layout>

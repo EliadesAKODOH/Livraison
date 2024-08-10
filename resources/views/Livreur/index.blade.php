@@ -1,8 +1,8 @@
-@extends('partials.navbar')
+@extends('partials.nav')
 @section('content')
 
 <div class="d-flex justify-content-end m-2">
-<a href="{{ route('livreur.create') }}" class="btn btn-primary"> 
+<a href="{{ route('livreur.create') }}" class="btn btn-primary">
   Ajouter Livreur
 </a>
 

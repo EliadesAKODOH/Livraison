@@ -14,7 +14,7 @@ class Supermarche extends Model
     {
        return $this->hasMany(Produit::class);
     }
-    public function categorie()
+    public function categories()
     {
        return $this->hasMany(Categorie::class);
     }

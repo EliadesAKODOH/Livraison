@@ -47,17 +47,24 @@ class ProduitController extends Controller
     /**
      * Stocker une ressource nouvellement créée dans le stockage.
      */
-    public function store(Request $request)
+    public function store(Request $request, Produit $produit)
     {
+
+
+
         $request->validate([
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'nom' => ['required'],
             'description' => ['required'],
             'prix' => ['required', 'numeric'],
-            'categorie' => ['required', 'exists:categories,id']
+            'en_stock'=>['required', 'numeric'],
+            'categorie_id' => ['required', 'exists:categories,id'],
         ]);
 
-        $imagePath = null;
+       dd($request->all());
+
+
+        $imagePath = null;  
 
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('uploads', 'public');
@@ -68,8 +75,10 @@ class ProduitController extends Controller
             'nom' => $request->nom,
             'description' => $request->description,
             'prix' => $request->prix,
+            'en_stock'=> $request->en_stock,
             'categorie_id' => $request->categorie,
-            
+            'supermarche_id' => Auth::user()->supermarche_id,
+
         ]);
 
         return redirect()->route('produit.index')->with('succes', 'Produit ajouté avec succès');
@@ -81,7 +90,7 @@ class ProduitController extends Controller
     public function show(string $id)
     {
         $produit = Produit::findOrFail($id);
-     
+
         return view('produit.show', compact('produit'));
     }
 
@@ -98,28 +107,37 @@ class ProduitController extends Controller
      * Mettre à jour la ressource spécifiée dans le stockage.
      */
     public function update(Request $request, Produit $produit)
-     { 
-        $request->validate([
+{
+    $request->validate([
         'image' => ['required', 'image'],
         'nom' => ['required'],
         'description' => ['required'],
         'prix' => ['required', 'numeric'],
-        'categorie' => ['required', 'exists:categories,id']
+        'en_stock'=>['required', 'numeric'],
+        'categorie_id' => ['required', 'exists:categories,id'],
+        'supermarche_id' => ['required', 'exists:supermarches,id'],
     ]);
 
-    $image = $request->file('image');
-    $imagePath = $image->store('images','public');
+    $imagePath = $produit->image; // Garder l'image existante par défaut
 
-     Produit::create([
-        'nom' => $request->nom,
-        'description' => $request->description,
-        'prix' => $request->prix,
-        'categorie_id' => $request->categorie,
-        'image' => $imagePath
-    ]);
-
-        return redirect()->route('produit.index')->with('succes', 'Produit modifié avec succès');
+    if ($request->hasFile('image')) {
+        $image = $request->file('image');
+        $imagePath = $image->store('images', 'public');
     }
+
+    $produit->update([
+        $produit->nom = $request->nom,
+        $produit->description = $request->description,
+        $produit->prix = $request->prix,
+        $en_stock->$request->en_stock,
+        $produit->categorie_id = $request->categorie_id,
+        $produit->image = $imagePath,
+        $produit->save()
+    ]);
+
+    return redirect()->route('produit.index')->with('success', 'Produit modifié avec succès');
+}
+
 
     /**
      * Supprimer la ressource spécifiée du stockage.

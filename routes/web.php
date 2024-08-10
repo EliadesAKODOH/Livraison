@@ -9,23 +9,23 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\SupermarcheController;
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\RegisteredUserController;
+use App\Http\Controllers\PanierController;
+use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\supController;
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController as AuthRegisteredUserController;
 use App\Http\Controllers\LivreurController;
 
-Route::get('/', function () {
-    return view('home');
-})->middleware(['auth']);
-
-// Route::get('/client', function () {
-//     return view('client.index');
-    
-// });
 
 Route::get('/dashboard', function () {
     return view('dashboard');
+
+});
+
+Route::get('/', function () {
+    return view('partials.navbar');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::resource('user', UserController::class);
@@ -33,7 +33,13 @@ Route::resource('produit', ProduitController::class);
 Route::resource('supermarche', SupermarcheController::class);
 Route::resource('livreur', LivreurController::class);
 Route::resource('categorie', CategorieController::class);
+Route::resource('panier', PanierController::class);
+Route::resource('article', ArticleController::class);
+Route::resource('client', ClientController::class);
+Route::resource('sup', SupController::class);
 Route::get('/client',[ProduitController::class, 'clientSide'])->name('client.index');
+Route::get('/images', [App\Http\Controllers\ImageController::class, 'index']);
+
 
 
 Route::post('/register', [RegisteredUserController::class, 'store'])->name('register');

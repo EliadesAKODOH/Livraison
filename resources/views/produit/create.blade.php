@@ -5,7 +5,7 @@
         <div class="col-md-6 mt-3">
             <div class="card">
                 <div class="card-header text-center">
-                    <h3>Créer une produit</h3>
+                    <h3>Créer un produit</h3>
                 </div>
                 <div class="card-body">
                     <form action="{{ route('produit.store') }}" method="POST" enctype="multipart/form-data">
@@ -29,7 +29,7 @@
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <select name="categorie" id="categorie" class="form-control">
+                            <select name="categorie_id" id="categorie" class="form-control">
                                 @foreach ($categories as $categorie)
                                 <option value="{{ $categorie->id }}">{{ $categorie->nom }}</option>
                                 @endforeach
@@ -38,6 +38,12 @@
                         <div class="mb-3">
                             <input type="number" id="prix" name="prix" placeholder="Prix" class="form-control">
                             @error('prix')
+                            <div class="text-danger" style="font-size: 14px;">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <input type="number" id="en_stock" name="en_stock" placeholder="En stock" class="form-control">
+                            @error('En stock')
                             <div class="text-danger" style="font-size: 14px;">{{ $message }}</div>
                             @enderror
                         </div>

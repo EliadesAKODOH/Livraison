@@ -86,7 +86,7 @@
               <img src="dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
               <div class="media-body">
                 <h3 class="dropdown-item-title">
-                  Astou 
+                  Astou
                   <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
                 </h3>
                 <p class="text-sm">Puis-je...</p>
@@ -102,7 +102,7 @@
               <img src="{{asset('dist/img/user8-128x128.jpg')}}" alt="User Avatar" class="img-size-50 img-circle mr-3">
               <div class="media-body">
                 <h3 class="dropdown-item-title">
-                  John 
+                  John
                   <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
                 </h3>
                 <p class="text-sm">C'est comment bro...</p>
@@ -118,7 +118,7 @@
               <img src="{{asset('dist/img/user3-128x128.jpg')}}" alt="User Avatar" class="img-size-50 img-circle mr-3">
               <div class="media-body">
                 <h3 class="dropdown-item-title">
-                  Nora 
+                  Nora
                   <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
                 </h3>
                 <p class="text-sm">Tu es encore en retard yyn</p>
@@ -146,7 +146,7 @@
           </a>
           <div class="dropdown-divider"></div>
           <a href="#" class="dropdown-item">
-            <i class="fas fa-users mr-2"></i> 8 amis 
+            <i class="fas fa-users mr-2"></i> 8 amis
             <span class="float-right text-muted text-sm">2h</span>
           </a>
           <div class="dropdown-divider"></div>
@@ -191,69 +191,62 @@
      <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="{{asset('dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
+          <img src="" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
           <a href="#" class="d-block">{{Auth::user()->nom}}</a>
         </div>
       </div>
 
-      <!-- Sidebar Menu -->
-      <nav class="mt-2">
-      <ul class="nav nav-pills nav-sidebar flex-column mt-3" data-widget="treeview" role="menu" data-accordion="false">
-        <li class="nav-item menu-open">
-          <a href="{{route('supermarche.index')}}" class="nav-link active"  >
-            <i class="nav-icon fas fa-utensils"></i>
-              Gestion des supermarchés
-            </a>
-        </li>
-      </ul>
-      <ul class="nav nav-pills nav-sidebar flex-column mt-3" data-widget="treeview" role="menu" data-accordion="false">
-        <li class="nav-item menu-open">
-          <a href="{{route('categorie.index')}}" class="nav-link active"  >
-            <i class="nav-icon fas fa-utensils"></i>
-              Gestion des catégories
-            </a>
-        </li>
-      </ul>
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+          <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <!-- Gestion des supermarchés -->
+            <li class="nav-item ">
+              <a href="{{ route('supermarche.index') }}" class="nav-link active">
+                <i class="nav-icon fas fa-store"></i>
+                <p>Gestion des supermarchés</p>
+              </a>
+            </li>
+            <!-- Gestion des Catégories -->
+            <li class="nav-item ">
+              <a href="{{ route('categorie.index') }}" class="nav-link active">
+                <i class="nav-icon fas fa-store"></i>
+                <p>Gestion des Catégories</p>
+              </a>
+            </li>
+            <!-- Gestion des Produits -->
+            <li class="nav-item ">
+              <a href="{{ route('produit.index') }}" class="nav-link active">
+                <i class="nav-icon fas fa-store"></i>
+                <p>Gestion des Produits</p>
+              </a>
+            </li>
 
-      <ul class="nav nav-pills nav-sidebar flex-column mt-3" data-widget="treeview" role="menu" data-accordion="false">
-        <li class="nav-item menu-open">
-          <a href="{{route('produit.index')}}" class="nav-link active"  >
-            <i class="nav-icon fas fa-utensils"></i>
-              Gestion des produits
-            </a>
-        </li>
-      </ul>
+            <!-- Gestion des clients -->
+            <li class="nav-item ">
+              <a href="{{ route('user.index') }}" class="nav-link active">
+                <i class="nav-icon fas fa-users"></i>
+                <p>Gestion des clients</p>
+              </a>
+            </li>
 
-      <ul class="nav nav-pills nav-sidebar flex-column mt-3" data-widget="treeview" role="menu" data-accordion="false" >
-                    <li class="nav-item menu-open">
-                      <a href="{{route('user.index')}}" class="nav-link active">
-                        <i class="nav-icon fas fa-user-cog"></i>
-                          Gestion des clients
-                      </a>
-                    </li>
-</i>
-</ul>
+            <!-- Gestion des livreurs -->
+            <li class="nav-item ">
+              <a href="{{ route('livreur.index') }}" class="nav-link active">
+                <i class="nav-icon fas fa-truck"></i>
+                <p>Gestion des livreurs</p>
+              </a>
+            </li>
 
-<ul class="nav nav-pills nav-sidebar flex-column mt-3" data-widget="treeview" role="menu" data-accordion="false">
-        <li class="nav-item menu-open">
-          <a href="{{route('livreur.index')}}" class="nav-link active"  >
-            <i class="nav-icon fas fa-utensils"></i>
-              Gestion des livreurs
-            </a>
-        </li>
-      </ul>
-
-      <ul class="nav nav-pills nav-sidebar flex-column mt-4" data-widget="treeview" role="menu" data-accordion="false">
-        <li class="nav-item menu-open">
-          <a href="{{route('user.index')}}" class="nav-link active"  >
-            <i class="nav-icon fas fa-utensils"></i>
-              Gestion des administrateurs
-            </a>
-        </li>
-      </ul>
-
+            <!-- Gestion des administrateurs -->
+            <li class="nav-item ">
+              <a href="{{ route('user.index') }}" class="nav-link active">
+                <i class="nav-icon fas fa-user-shield"></i>
+                <p>Gestion des administrateurs</p>
+              </a>
+            </li>
+          </ul>
       </nav>
       <!-- /.sidebar-menu -->
     </div>
@@ -264,7 +257,7 @@
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     @yield('content')
-    
+
     </section>
     <!-- /.content -->
   </div>

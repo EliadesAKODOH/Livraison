@@ -19,28 +19,32 @@
                      </div>
                      <div class="mb-3">
                             <input type="text" name="nom" value="{{$produit->nom}}" class="form-control">
-                            @error('nom') 
+                            @error('nom')
                             <p>{{$message}}</p>
                             @enderror
                     </div>
                     <div class="mb-3">
-                            <textarea name="description" class="form-control">{{$produit->description}}</textarea> 
-                            @error('description') 
+                            <textarea name="description" class="form-control">{{$produit->description}}</textarea>
+                            @error('description')
                             <p>{{$message}}</p>
                             @enderror
                     </div>
                     <div class="mb-3">
-                            <select name="categorie" id="" class="form-control">
+                            <select name="categorie_id" id="" class="form-control">
                                 @foreach ($categories as $categorie)
                                 <option value="{{$categorie->id}}">{{$categorie->nom}}</option>
                                 @endforeach
                             </select> <br>
-                            @error('categorie') 
+                            @error('categorie')
                             <p>{{$message}}</p>
                             @enderror
                     </div>
                     <input type="number" name="prix" value="{{$produit->prix}}" class="form-control"><br>
-                    @error('prix') 
+                    @error('prix')
+                    <p>{{$message}}</p>
+                    @enderror
+                    <input type="number" name="en_stock" value="{{$produit->en_stock}}" class="form-control"><br>
+                    @error('En stock')
                     <p>{{$message}}</p>
                     @enderror
                     <div class="text-center">

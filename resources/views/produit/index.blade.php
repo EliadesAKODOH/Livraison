@@ -4,7 +4,7 @@
     <!-- Layout wrapper -->
 
     <div class="d-flex justify-content-end m-2">
-<a href="{{ route('produit.create') }}" class="btn btn-primary"> 
+<a href="{{ route('produit.create') }}" class="btn btn-primary">
   Ajouter Produit
 </a>
 </div>
@@ -24,6 +24,7 @@
                       <td>Description</td>
                       <td>Catégorie</td>
                       <td>Prix</td>
+                      <td>En stock</td>
                       <td>Action</td>
                     </tr>
                  </thead>
@@ -36,11 +37,12 @@
                       <th> {{$produit->nom}} </th>
                       <th> {{$produit->description}} </th>
                       <th>
-                        
+
                        {{$produit->categorie ? $produit->categorie->nom : "RAS"}}
-                       
+
                       </th>
                       <th> {{$produit->prix}} </th>
+                      <th> {{$produit->en_stock}} </th>
                       <th style="width: 320px;">
           <a href="{{ route('produit.edit',['produit' => $produit->id]) }}" class="btn btn-primary">Modifier</a>
           <form action="{{ route('produit.destroy',['produit' => $produit->id]) }}" method="POST" style="display: inline;">
@@ -52,6 +54,6 @@
         </th>
                     </tr>
                     @endforeach
-                  </tbody> 
+                  </tbody>
                 </table>
     @endsection

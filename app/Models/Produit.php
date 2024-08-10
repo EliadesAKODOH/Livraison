@@ -9,22 +9,24 @@ class Produit extends Model
 {
     use HasFactory;
     protected $fillable = [
-      'image', 
+      'image',
       'nom',
       'description',
       'categorie_id',
       'prix',
+      'en_stock',
+      'supermarche_id'
     ];
 
     public function categorie()
     {
-      
+
        return $this->belongsTo(Categorie::class);
 
     }
     public function supermarches()
     {
-      
+
        return $this->belongsTo(supermarche::class);
 
     }

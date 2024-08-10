@@ -35,7 +35,7 @@ class SupermarcheController extends Controller
             'image_sup' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        
+
 
         $imagePath = null;
         if ($request->hasFile('image_sup')) {
@@ -53,10 +53,10 @@ class SupermarcheController extends Controller
             'email_sup' => $request->email_sup,
             'adresse_sup' => $request->adresse_sup,
             'image_sup' =>  $imagePath,
-          
-            
+
+
         ]);
-        
+
 
         return redirect()->route('supermarche.index')->with('succes', 'Supermarché ajouté avec succès');
     }
@@ -80,12 +80,9 @@ class SupermarcheController extends Controller
         return view('supermarche.edit', compact('supermarche'));
     }
 
-    /**
-     * Mettre à jour la ressource spécifiée dans le stockage.
-     */
-    public function update(Request $request, Supermarche $supermarche)
-     { 
-        $request->validate([
+    public function update(Request $request, $id)
+{
+    $request->validate([
         'nom_sup' => ['required'],
         'email_sup' => ['required'],
         'adresse_sup' => ['required'],
@@ -95,20 +92,15 @@ class SupermarcheController extends Controller
     $image = $request->file('image');
     $imagePath = $image->store('images','public');
 
-     Supermarche::create([
-        'nom_sup' => $request->nom,
-        'email_sup' => $request->email,
-        'adresse_sup' => $request->adresse,
-        'image_sup' => $imagePath
-        
-    ]);
+    $supermarche = supermarche::find($id);
+    $supermarche->nom_sup = $request->nom_sup;
+    $supermarche->email_sup = $request->email_sup;
+    $supermarche->adresse_sup = $request->adresse_sup;
+    $supermarche->image_sup = $request->image_sup;
+    $supermarche->save();
 
-        return redirect()->route('supermarche.index')->with('succes', 'supermarche modifié avec succès');
-    }
-
-    /**
-     * Supprimer la ressource spécifiée du stockage.
-     */
+    return redirect()->route('supermarche.index')->with('succes', 'supermarche modifié avec succès');
+}
     public function destroy(Supermarche $supermarche)
     {
         $supermarche->delete();

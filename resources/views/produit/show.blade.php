@@ -25,6 +25,9 @@
                         <div class="mb-3">
                          <p class="m-2">Prix:{{$produit->prix}}</p>
                         </div>
+                        <div class="mb-3">
+                         <p class="m-2">En stock:{{$produit->en_stock}}</p>
+                        </div>
                 </div>
             </div>
         </div>
