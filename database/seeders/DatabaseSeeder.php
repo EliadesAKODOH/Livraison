@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Support\Facades\Hash; 
+use Illuminate\Support\Facades\Hash;
 use App\Models\Supermarche;
 use App\Models\User;
 use App\Models\Role;
@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-      
+
 
         $admin =  Role::create([
           'name'=>'admin'
@@ -46,7 +46,7 @@ class DatabaseSeeder extends Seeder
           'telephone'=>'95555555',
           'password'=>Hash::make('password'),
           'role_id'=> 1,
-          'supermarche_id' => 1  
+          'supermarche_id' => 1
         ]);
         $aureano = User::create([
             'nom'=>'Auréano',
@@ -55,7 +55,7 @@ class DatabaseSeeder extends Seeder
              'telephone'=>'95555556',
              'password'=>Hash::make('password'),
              'role_id'=> 2,
-             'supermarche_id' => 1  
+             'supermarche_id' => 1
            ]);
            $janvier = User::create([
             'nom'=>'Janvier',
@@ -64,7 +64,7 @@ class DatabaseSeeder extends Seeder
              'telephone'=>'95401515',
              'password'=>Hash::make('password'),
              'role_id'=> 3,
-             'supermarche_id' => 1  
+             'supermarche_id' => 1
            ]);
            $miracle = User::create([
             'nom'=>'Miracle',
@@ -73,10 +73,10 @@ class DatabaseSeeder extends Seeder
              'telephone'=>'41188804',
              'password'=>Hash::make('password'),
              'role_id'=> 4,
-             'supermarche_id' => 1  
+             'supermarche_id' => 1
            ]);
 
-          
-          
+
+
     }
 }

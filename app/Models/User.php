@@ -23,8 +23,8 @@ class User extends Authenticatable
         'telephone',
         'adresse',
         'password',
-        'type',
-        'role_id'
+        'role_id',
+        'supermarche_id',
     ];
 
     /**
@@ -51,7 +51,7 @@ class User extends Authenticatable
     }
 
 
-    public function role()
+    public function roles()
     {
         return $this->belongsTo(Role::class);
     }
@@ -60,7 +60,7 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Panier::class);
     }
-    
+
     public function supermarches()
     {
         return $this->belongsTo(Supermarche::class);

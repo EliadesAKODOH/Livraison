@@ -19,6 +19,8 @@ return new class extends Migration
             $table->integer('telephone')->unique();
             $table->string('adresse');
             $table->string('password');
+            $table->foreignId('role_id')->constrained()->onDelete('cascade');
+            $table->foreignId('supermarche_id')->constrained()->onDelete('cascade');
             $table->rememberToken();
             $table->timestamps();
         });
