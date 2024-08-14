@@ -2,8 +2,8 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-6 mt-3">
-            <div class="card">
+        <div class="col-md-6 mt-5">
+            <div class="card mt-5">
                 <div class="card-header text-center">
                     <h3>Créer un produit</h3>
                 </div>

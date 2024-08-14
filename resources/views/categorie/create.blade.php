@@ -4,7 +4,7 @@
     <div class="row justify-content-center">
         <div class="col-md-6 mt-5">
             <div class="card mt-5">
-                <div class="card-header text-center">
+                <div class="card-header text-center mt-5">
                     <h3>Créer une catégorie</h3>
                 </div>
                 <div class="card-body">

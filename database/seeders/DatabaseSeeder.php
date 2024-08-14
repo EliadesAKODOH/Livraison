@@ -36,47 +36,13 @@ class DatabaseSeeder extends Seeder
                ]);
          $supermarche =  Role::create([
                'name'=>'supermarche'
-               ]);
+         ]);
 
-
-        $precieuse = User::create([
-         'nom'=>'Precious',
-          'email'=>'precious@gmail.com',
-          'adresse'=>'Amerique',
-          'telephone'=>'95555555',
-          'password'=>Hash::make('password'),
-          'role_id'=> 1,
-          'supermarche_id' => 1
+         $azima = Supermarche::create([
+            'nom_sup'=>'Azima Store',
+            'email_sup'=>'azimastore@gmail.com',
+            'adresse_sup'=>'Bidossessi',
+            'image_sup'=>'azima.jpg'
         ]);
-        $aureano = User::create([
-            'nom'=>'Auréano',
-             'email'=>'aure@gmail.com',
-             'adresse'=>'Paris',
-             'telephone'=>'95555556',
-             'password'=>Hash::make('password'),
-             'role_id'=> 2,
-             'supermarche_id' => 1
-           ]);
-           $janvier = User::create([
-            'nom'=>'Janvier',
-             'email'=>'janvier@gmail.com',
-             'adresse'=>'New York',
-             'telephone'=>'95401515',
-             'password'=>Hash::make('password'),
-             'role_id'=> 3,
-             'supermarche_id' => 1
-           ]);
-           $miracle = User::create([
-            'nom'=>'Miracle',
-             'email'=>'miracle@gmail.com',
-             'adresse'=>'Mexique',
-             'telephone'=>'41188804',
-             'password'=>Hash::make('password'),
-             'role_id'=> 4,
-             'supermarche_id' => 1
-           ]);
-
-
-
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\User;
+use App\Models\Role;
 
 use Illuminate\Http\Request;
 
@@ -14,7 +15,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users= User::with('role')->get();
+        $users= User::all();
         return view('user.index',compact('users'));
     }
 
@@ -23,22 +24,33 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view("user.create");
+        $roles = Role::all();
+        return view('user.create', compact('roles'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request )
     {
         $request->validate([
         'nom'=> ['required'],
-        'role'=> ['required'],
+        'role_id' => ['required', 'exists:roles,id'],
         'email'=> ['required'],
         'telephone'=> ['required'],
         'adresse'=> ['required'],
+        'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
-        User::create($request->all());
+
+        User::create([
+            'nom' => $request->nom,
+            'role_id' => $request->role,
+            'email' => $request->email,
+            'telephone' => $request->telephone,
+            'adresse'=> $request->adresse,
+            'password' => Hash::make($request->password),
+            'supermarche_id'=>1,
+        ]);
         return redirect()->route('user.index')->with('succes','Utilisateur créer avec succès');
     }
 
@@ -49,7 +61,7 @@ class UserController extends Controller
     {
     $user = User::findOrFail($id);
     return view('user.show', compact('user'));
-       
+
     }
 
     /**
@@ -57,7 +69,8 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('user.edit',compact('user'));
+        $roles = Role::all();
+        return view('user.edit',compact('user','roles'));
     }
 
     /**
@@ -67,13 +80,21 @@ class UserController extends Controller
     {
         $request->validate([
             'nom'=> ['required'],
-            'role'=> ['required'],
+            'role_id'=> ['required'],
             'email'=> ['required'],
             'telephone'=> ['required'],
             'adresse'=> ['required'],
+           'password' => ['required', 'string', 'min:8', 'confirmed'],
             ]);
             // dd($request->all());
-            $user->update($request->all());  
+            $user->update([
+              'nom' => $request->nom,
+            'role_id' => $request->role,
+            'email' => $request->email,
+            'telephone' => $request->telephone,
+            'adresse'=> $request->adresse,
+            'password' => Hash::make($request->password),
+            ]);
           return redirect()->route('user.index')->with('succes','Utilisateur modifié avec succès');
     }
 
@@ -82,7 +103,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        
+
         $user->delete();
         return redirect()->route('user.index')->with('succes','utilisateur supprimé avec succès');
     }

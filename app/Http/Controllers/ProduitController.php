@@ -50,8 +50,6 @@ class ProduitController extends Controller
     public function store(Request $request, Produit $produit)
     {
 
-
-
         $request->validate([
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'nom' => ['required'],
@@ -64,7 +62,7 @@ class ProduitController extends Controller
        dd($request->all());
 
 
-        $imagePath = null;  
+        $imagePath = null;
 
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('uploads', 'public');
