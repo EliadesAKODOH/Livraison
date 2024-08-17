@@ -3,10 +3,9 @@
 
     <div class="card mt-5">
         <div class="d-flex justify-content-end mt-5">
-            <a href="{{ route('categorie.create') }}" class="btn btn-primary">
-            Ajouter une catégorie
+            <a href="{{ route('role.create') }}" class="btn btn-primary">
+            Ajouter un Rôle
             </a>
-
         </div>
         @if(session('succes'))
 
@@ -22,21 +21,21 @@
             </tr>
             </thead>
             <tbody>
-            @foreach($categories as $categorie)
+            @foreach($roles as $role)
             <tr>
-                <th>{{ $categorie->nom }}</th>
+                <th>{{ $role->name }}</th>
                 <th>
-                    <a href="{{ route('categorie.edit',['categorie' => $categorie->id]) }}" class="btn btn-primary" title="Modifier">
+                    <a href="{{ route('role.edit',['role' => $role->id]) }}" class="btn btn-primary" title="Modifier">
                       <i class="fas fa-edit"></i>
                     </a>
-                    <form action="{{ route('categorie.destroy',['categorie' => $categorie->id]) }}" method="POST" style="display: inline;" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce categorie ?');">
+                    <form action="{{ route('role.destroy',['role' => $role->id]) }}" method="POST" style="display: inline;" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce role ?');">
                       @csrf
                       @method('DELETE')
                       <button type="submit" class="btn btn-danger" title="Supprimer">
                         <i class="fas fa-trash-alt"></i>
                       </button>
                     </form>
-                    <a href="{{ route('categorie.show', $categorie->id) }}" class="btn btn-success" title="Voir">
+                    <a href="{{ route('role.show', $role->id) }}" class="btn btn-success" title="Voir">
                       <i class="fas fa-eye"></i>
                     </a>
                    </th>

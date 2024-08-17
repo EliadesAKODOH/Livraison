@@ -8,15 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Panier extends Model
 {
 
-    public function users()
+    public function user()
     {
-      
+
        return $this->belongsTo(User::class);
 
     }
     public function produits()
     {
-      
+
        return $this->belongsToMany(Produit::class);
 
     }

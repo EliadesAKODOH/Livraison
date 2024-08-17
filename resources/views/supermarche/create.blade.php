@@ -2,7 +2,7 @@
 @section('content')
 <div class="container mt-5">
     <div class="row justify-content-center">
-        <div class="col-md-6 mt-3">
+        <div class="col-md-8 mt-5">
             <div class="card">
                 <div class="card-header text-center">
                     <h3>Créer un supermarché</h3>

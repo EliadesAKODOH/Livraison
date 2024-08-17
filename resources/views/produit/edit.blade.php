@@ -8,46 +8,45 @@
                     <h3>Modifier un produit</h3>
                 </div>
                 <div class="card-body">
-                  <form action="{{route('produit.update', ['produit'=>$produit->id])}} " method="POST" enctype="multipart/form-data >
+                  <form action="{{route('produit.update', ['produit'=>$produit->id])}} " method="POST" enctype="multipart/form-data" >
                     @csrf
                     @method('put')
-
                     <div class="mb-3">
-                     <input type="file" name="image" class="form-control" id="image" required>
+                     <input type="file" name="image" class="form-control" id="image">
                      @error('image')
                      <div class="text-danger" style="font-size: 14px;">{{ $message }}</div>
                      @enderror
                     </div>
                     <div class="mb-3">
-                     <input type="text" name="nom" value="{{$produit->nom}}" class="form-control">
+                     <input type="text" name="nom" value="{{$produit->nom}}" class="form-control" id="nom">
                      @error('nom')
                      <p>{{$message}}</p>
                      @enderror
                     </div>
                     <div class="mb-3">
-                     <textarea name="description" class="form-control">{{$produit->description}}</textarea>
+                     <textarea name="description" class="form-control" id="description">{{$produit->description}}</textarea>
                      @error('description')
                      <p>{{$message}}</p>
                      @enderror
                     </div>
                     <div class="mb-3">
-                     <select name="categorie_id" id="" class="form-control">
+                     <select name="categorie_id" id="categorie" class="form-control">
                          @foreach ($categories as $categorie)
                          <option value="{{$categorie->id}}">{{$categorie->nom}}</option>
                          @endforeach
-                     </select> <br>
+                     </select>
                      @error('categorie')
                      <p>{{$message}}</p>
                      @enderror
                     </div>
                     <div class="mb-3">
-                        <input type="number" name="prix" value="{{$produit->prix}}" class="form-control"><br>
+                        <input type="number" name="prix" value="{{$produit->prix}}" class="form-control" id="prix">
                         @error('prix')
                         <p>{{$message}}</p>
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <input type="number" name="en_stock" value="{{$produit->en_stock}}" class="form-control"><br>
+                        <input type="number" name="en_stock" value="{{$produit->en_stock}}" class="form-control" id="en_stock">
                         @error('En stock')
                         <p>{{$message}}</p>
                         @enderror

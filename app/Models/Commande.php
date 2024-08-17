@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Commande extends Model
 {
- 
-    public function livraisons()
+
+    public function livraison()
     {
-      
+
        return $this->belongsTo(Livraison::class);
 
     }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Categorie;
 use Illuminate\Http\Request;
 use App\Models\Produit;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 
 class ProduitController extends Controller
@@ -59,14 +60,7 @@ class ProduitController extends Controller
             'categorie_id' => ['required', 'exists:categories,id'],
         ]);
 
-       dd($request->all());
-
-
-        $imagePath = null;
-
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('uploads', 'public');
-        }
+        $imagePath = $request->file('image')->store('images', 'public');
 
         Produit::create([
             'image' => $imagePath,
@@ -74,7 +68,7 @@ class ProduitController extends Controller
             'description' => $request->description,
             'prix' => $request->prix,
             'en_stock'=> $request->en_stock,
-            'categorie_id' => $request->categorie,
+            'categorie_id' => $request->categorie_id,
             'supermarche_id' => Auth::user()->supermarche_id,
 
         ]);
@@ -113,24 +107,21 @@ class ProduitController extends Controller
         'prix' => ['required', 'numeric'],
         'en_stock'=>['required', 'numeric'],
         'categorie_id' => ['required', 'exists:categories,id'],
-        'supermarche_id' => ['required', 'exists:supermarches,id'],
     ]);
 
-    $imagePath = $produit->image; // Garder l'image existante par défaut
-
     if ($request->hasFile('image')) {
-        $image = $request->file('image');
-        $imagePath = $image->store('images', 'public');
+        $imagePath = $request->file('image')->store('images', 'public');
+        $produit->image = $imagePath;
     }
 
     $produit->update([
-        $produit->nom = $request->nom,
-        $produit->description = $request->description,
-        $produit->prix = $request->prix,
-        $en_stock->$request->en_stock,
-        $produit->categorie_id = $request->categorie_id,
-        $produit->image = $imagePath,
-        $produit->save()
+       'image' => $imagePath,
+        'nom' => $request->nom,
+        'description' => $request->description,
+        'prix' => $request->prix,
+        'en_stock'=> $request->en_stock,
+        'categorie_id' => $request->categorie_id,
+        'supermarche_id' => Auth::user()->supermarche_id,
     ]);
 
     return redirect()->route('produit.index')->with('success', 'Produit modifié avec succès');
