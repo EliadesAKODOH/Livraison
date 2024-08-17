@@ -55,15 +55,18 @@
                 <div class="container-fluid">
                     <ul class="navbar-mobile__list list-unstyled">
                         <li class="has-sub">
-                            <a class="js-arrow" href="#">
+                            <a class="js-arrow" href="{{route('user.index')}}">
                                 <i class="fas fa-tachometer-alt"></i>Dashboard</a>
                         </li>
                         <li class="has-sub">
-                            <a class="js-arrow" href="{{route('user.index')}}">Gestion des Clients</a>
+                            <a class="js-arrow" href="{{route('user.index_client')}}">Gestion des Clients</a>
                         </li>
                         <li class="has-sub">
-                            <a class="js-arrow" href="{{route('user.index')}}">Gestion des supermarché</a>
+                            <a class="js-arrow" href="#">Gestion des supermarché</a>
                             <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                                <li>
+                                    <a href="{{route('supermarche.index')}}">Supermarchés</a>
+                                </li>
                                 <li>
                                     <a href="{{route('categorie.index')}}">Catégorie</a>
                                 </li>
@@ -73,10 +76,13 @@
                             </ul>
                         </li>
                         <li class="has-sub">
-                            <a class="js-arrow" href="{{route('user.index')}}">Gestion des Livreurs</a>
+                            <a class="js-arrow" href="{{route('user.index_livreur')}}">Gestion des Livreurs</a>
                         </li>
                         <li class="has-sub">
-                            <a class="js-arrow" href="{{route('user.index')}}">Gestion des Administrateurs</a>
+                            <a class="js-arrow" href="{{route('user.index_admin')}}">Gestion des Administrateurs</a>
+                        </li>
+                        <li class="has-sub">
+                            <a class="js-arrow" href="{{route('role.index')}}">Gestion des Rôles</a>
                         </li>
                     </ul>
                 </div>
@@ -95,15 +101,18 @@
                 <nav class="navbar-sidebar">
                     <ul class="list-unstyled navbar__list">
                         <li class="active has-sub">
-                            <a class="js-arrow" href="#">
+                            <a class="js-arrow" href="{{route('user.index')}}">
                                 <i class="fas fa-tachometer-alt"></i>Dashboard</a>
                         </li>
                         <li class="has-sub">
-                            <a class="js-arrow" href="{{route('user.index')}}">Gestion des Clients</a>
+                            <a class="js-arrow" href="{{route('user.index_client')}}">Gestion des Clients</a>
                         </li>
                         <li class="has-sub">
-                            <a class="js-arrow" href="{{route('user.index')}}">Gestion des Supermarchés</a>
+                            <a class="js-arrow" href="#">Gestion des Supermarchés</a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                <li>
+                                    <a href="{{route('supermarche.index')}}">Supermarchés</a>
+                                </li>
                                 <li>
                                     <a href="{{route('categorie.index')}}">Catégorie</a>
                                 </li>
@@ -113,10 +122,13 @@
                             </ul>
                         </li>
                         <li class="has-sub">
-                            <a class="js-arrow" href="{{route('user.index')}}">Gestion des Livreurs</a>
+                            <a class="js-arrow" href="{{route('user.index_livreur')}}">Gestion des Livreurs</a>
                         </li>
                         <li class="has-sub">
-                            <a class="js-arrow" href="{{route('user.index')}}">Gestion des Administrateurs</a>
+                            <a class="js-arrow" href="{{route('user.index_admin')}}">Gestion des Administrateurs</a>
+                        </li>
+                        <li class="has-sub">
+                            <a class="js-arrow" href="{{route('role.index')}}">Gestion des Rôles</a>
                         </li>
                     </ul>
                 </nav>
@@ -132,7 +144,7 @@
                     <div class="container-fluid">
                         <div class="header-wrap">
                             <form class="form-header" action="" method="POST">
-                                <input class="au-input au-input--xl" type="text" name="search" placeholder="Search for datas &amp; reports..." />
+                                <input class="au-input au-input--xl" type="text" name="search" placeholder="Rechercher...." />
                                 <button class="au-btn--submit" type="submit">
                                     <i class="zmdi zmdi-search"></i>
                                 </button>
@@ -253,7 +265,7 @@
                                 <div class="account-wrap">
                                     <div class="account-item clearfix js-item-menu">
                                         <div class="image">
-                                            <img src="{{asset ('images/')}}" alt="" />
+                                            <img src="{{asset ('images/icon/user.jpg')}}" alt="" />
                                         </div>
                                         <div class="content">
                                             <a class="js-acc-btn" href="#">{{Auth::user()->nom}}</a>
@@ -262,7 +274,7 @@
                                             <div class="info clearfix">
                                                 <div class="image">
                                                     <a href="#">
-                                                        <img src="{{asset ('images/icon/avatar-01.jpg')}}" alt="" />
+                                                        <img src="{{asset ('images/icon/user.jpg')}}" alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="content">
@@ -283,8 +295,13 @@
                                                 </div>
                                             </div>
                                             <div class="account-dropdown__footer">
-                                                <a href="{{route('logout')}}">
-                                                    <i class="zmdi zmdi-power"></i>Déconnexion</a>
+                                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                    @csrf
+                                                </form>
+
+                                                <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                                    <i class="zmdi zmdi-power"></i>Déconnexion
+                                                </a>
                                             </div>
                                         </div>
                                     </div>

@@ -29,7 +29,7 @@ class CategorieController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         $request->validate([
            'nom'=>['required'],
         ]);
@@ -47,7 +47,7 @@ class CategorieController extends Controller
     public function show(string $id)
     {
         $categorie = Categorie::findOrFail($id);
-        
+
        return view('categorie.show', compact('categorie'));
     }
 
@@ -67,14 +67,14 @@ public function update(Request $request, $id)
     $categorie->nom = $request->nom;
     $categorie->save();
 
-    return redirect()->route('categories.index')->with('success', 'Catégorie mise à jour avec succès');
+    return redirect()->route('categorie.index')->with('success', 'Catégorie mise à jour avec succès');
 }
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Categorie $categorie)
     {
-        
+
         $categorie->delete();
         return redirect()->route('client.index')->with('succes','Categorie supprimé avec succès');
     }

@@ -17,32 +17,32 @@
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <input type="text" name="nom" placeholder="Nom" class="form-control" id="nom">
+                            <input type="text" name="nom" placeholder="Nom" class="form-control" id="nom" required>
                             @error('nom')
                             <div class="text-danger" style="font-size: 14px;">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <textarea name="description" id="description" placeholder="Description" class="form-control"></textarea>
+                            <textarea name="description" id="description" placeholder="Description" class="form-control" required></textarea>
                             @error('description')
                             <div class="text-danger" style="font-size: 14px;">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <select name="categorie_id" id="categorie" class="form-control">
+                            <select name="categorie_id" id="categorie" class="form-control" required>
                                 @foreach ($categories as $categorie)
                                 <option value="{{ $categorie->id }}">{{ $categorie->nom }}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="mb-3">
-                            <input type="number" id="prix" name="prix" placeholder="Prix" class="form-control">
+                            <input type="number" id="prix" name="prix" placeholder="Prix" class="form-control" required>
                             @error('prix')
                             <div class="text-danger" style="font-size: 14px;">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <input type="number" id="en_stock" name="en_stock" placeholder="En stock" class="form-control">
+                            <input type="number" id="en_stock" name="en_stock" placeholder="En stock" class="form-control" required>
                             @error('En stock')
                             <div class="text-danger" style="font-size: 14px;">{{ $message }}</div>
                             @enderror

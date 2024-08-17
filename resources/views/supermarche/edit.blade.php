@@ -2,13 +2,13 @@
 @section('content')
 <div class="container mt-5">
     <div class="row justify-content-center">
-        <div class="col-md-6 mt-3">
+        <div class="col-md-8 mt-5">
             <div class="card">
                 <div class="card-header text-center">
-                    <h3>Modifier un supermarché</h3>
+                    <h3>Modifier {{$supermarche->nom_sup}}</h3>
                 </div>
                 <div class="card-body">
-                  <form action="{{route('supermarche.update', ['supermarche'=>$supermarche->id])}}" method="POST" enctype="multipart/form-data">
+                  <form action="{{route('supermarche.update', $supermarche->id)}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('put')
                       <div class="mb-3">
@@ -20,14 +20,14 @@
 
                       <div class="mb-3">
                         <input type="email" name="email_sup" value="{{$supermarche->email_sup}}" class="form-control">
-                            @error('email') 
+                            @error('email')
                             <div class="text-danger" style="font-size: 14px;">{{ $message }}</div>
                             @enderror
                       </div>
 
                      <div class="mb-3">
                         <input type="text" name="adresse_sup" value="{{$supermarche->adresse_sup}}" class="form-control">
-                            @error('adresse') 
+                            @error('adresse')
                             <div class="text-danger" style="font-size: 14px;">{{ $message }}</div>
                             @enderror
                     </div>
@@ -37,7 +37,7 @@
                     @error('image')
                     <p>{{message}}</p>
                     @enderror
-                    </div>
+                    </div>4
                     <div class="text-center">
                             <button type="submit" class="btn btn-primary">Modifier</button>
                         </div>
@@ -46,5 +46,5 @@
             </div>
         </div>
     </div>
-</div>
-                @endsection
+ </div>
+@endsection

@@ -1,11 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\User;
 use App\Models\Role;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 
 
 class UserController extends Controller
@@ -15,8 +18,25 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users= User::all();
+        $users = User::with('role')->get();
         return view('user.index',compact('users'));
+    }
+    public function index_admin()
+    {
+        $users = User::where('role_id', 1)->get();
+        return view('user.index_admin', compact('users'));
+    }
+
+    public function index_client()
+    {
+        $users = User::where('role_id', 2)->get();
+        return view('user.index_client', compact('users'));
+    }
+
+    public function index_livreur()
+    {
+        $users = User::where('role_id', 3)->get();
+        return view('user.index_livreur', compact('users'));
     }
 
     /**
@@ -39,12 +59,12 @@ class UserController extends Controller
         'email'=> ['required'],
         'telephone'=> ['required'],
         'adresse'=> ['required'],
-        'password' => ['required', 'string', 'min:8', 'confirmed'],
+        'password' => ['required', 'string', 'min:8'],
         ]);
 
         User::create([
             'nom' => $request->nom,
-            'role_id' => $request->role,
+            'role_id' => $request->role_id,
             'email' => $request->email,
             'telephone' => $request->telephone,
             'adresse'=> $request->adresse,
@@ -80,20 +100,21 @@ class UserController extends Controller
     {
         $request->validate([
             'nom'=> ['required'],
-            'role_id'=> ['required'],
+            'role_id' => ['required', 'exists:roles,id'],
             'email'=> ['required'],
             'telephone'=> ['required'],
             'adresse'=> ['required'],
-           'password' => ['required', 'string', 'min:8', 'confirmed'],
+           'password' => ['required', 'string', 'min:8'],
             ]);
-            // dd($request->all());
+
             $user->update([
-              'nom' => $request->nom,
-            'role_id' => $request->role,
+            'nom' => $request->nom,
+            'role_id' =>$request->role_id,
             'email' => $request->email,
             'telephone' => $request->telephone,
             'adresse'=> $request->adresse,
             'password' => Hash::make($request->password),
+            'supermarche_id'=>1,
             ]);
           return redirect()->route('user.index')->with('succes','Utilisateur modifié avec succès');
     }

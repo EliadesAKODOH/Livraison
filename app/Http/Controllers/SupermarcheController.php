@@ -30,36 +30,25 @@ class SupermarcheController extends Controller
     {
         $request->validate([
             'nom_sup' => ['required','max:20'],
-            'email_sup' => ['required','email','string','unique:'.Supermarche::class],
+            'email_sup' => ['required','email','string','unique:supermarches,email_sup'],
             'adresse_sup' => ['required'],
             'image_sup' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
+        // Gérer le téléchargement de l'image
+        $imagePath = $request->file('image_sup')->store('images', 'public');
 
-
-        $imagePath = null;
-        if ($request->hasFile('image_sup')) {
-            $imagePath = $request->file('image_sup')->store('uploads', 'public');
-        }
-
-        $image = $request->file('image_sup');
-        $imagePath = $image->store('images','public');
-
-
-
-
+        // Créer le supermarché avec les données
         Supermarche::create([
             'nom_sup' => $request->nom_sup,
             'email_sup' => $request->email_sup,
             'adresse_sup' => $request->adresse_sup,
-            'image_sup' =>  $imagePath,
-
-
+            'image_sup' => $imagePath,
         ]);
-
 
         return redirect()->route('supermarche.index')->with('succes', 'Supermarché ajouté avec succès');
     }
+
 
     /**
      * Afficher la ressource spécifiée.
@@ -67,43 +56,49 @@ class SupermarcheController extends Controller
     public function show(string $id)
     {
         $supermarche = Supermarche::findOrFail($id);
-       // dd($supermarche->image);
         return view('supermarche.show', compact('supermarche'));
     }
 
-    /**
-     * Montrer le formulaire pour éditer la ressource spécifiée.
-     */
+    // Montrer le formulaire pour éditer un supermarché
     public function edit(Supermarche $supermarche)
     {
-        $supermarche = Supermarche::all();
         return view('supermarche.edit', compact('supermarche'));
     }
 
+    // Mettre à jour un supermarché existant
     public function update(Request $request, $id)
-{
-    $request->validate([
-        'nom_sup' => ['required'],
-        'email_sup' => ['required'],
-        'adresse_sup' => ['required'],
-        'image_sup' => ['required', 'image'],
-    ]);
+    {
+        $request->validate([
+            'nom_sup' => ['required'],
+            'email_sup' => ['required', 'email', 'string', 'unique:supermarches,email_sup,'.$id],
+            'adresse_sup' => ['required'],
+            'image_sup' => ['image'],
+        ]);
 
-    $image = $request->file('image');
-    $imagePath = $image->store('images','public');
+        $supermarche = Supermarche::findOrFail($id);
 
-    $supermarche = supermarche::find($id);
-    $supermarche->nom_sup = $request->nom_sup;
-    $supermarche->email_sup = $request->email_sup;
-    $supermarche->adresse_sup = $request->adresse_sup;
-    $supermarche->image_sup = $request->image_sup;
-    $supermarche->save();
+        // Si une nouvelle image est téléchargée, on la stocke
+        if ($request->hasFile('image_sup')) {
+            $imagePath = $request->file('image_sup')->store('images', 'public');
+            $supermarche->image_sup = $imagePath;
+        }
 
-    return redirect()->route('supermarche.index')->with('succes', 'supermarche modifié avec succès');
-}
+        // Mise à jour des autres champs
+        $supermarche->update([
+            'nom_sup' => $request->nom_sup,
+            'email_sup' => $request->email_sup,
+            'adresse_sup' => $request->adresse_sup,
+            'image_sup' => $imagePath,
+        ]);
+
+        return redirect()->route('supermarche.index')->with('succes', 'Supermarché modifié avec succès');
+    }
+
+
+    // Supprimer un supermarché
     public function destroy(Supermarche $supermarche)
     {
         $supermarche->delete();
-        return redirect()->route('supermarche.index')->with('succes', 'supermarche supprimé avec succès');
+        return redirect()->route('supermarche.index')->with('succes', 'Supermarché supprimé avec succès');
     }
 }

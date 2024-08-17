@@ -24,7 +24,7 @@ class Produit extends Model
        return $this->belongsTo(Categorie::class);
 
     }
-    public function supermarches()
+    public function supermarche()
     {
 
        return $this->belongsTo(supermarche::class);

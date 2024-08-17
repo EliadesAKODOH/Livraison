@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Models;
-use App\models\Role;
+use App\Models\Role;
+
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -53,7 +54,7 @@ class User extends Authenticatable
     }
 
 
-    public function roles()
+    public function role()
     {
         return $this->belongsTo(Role::class);
     }
@@ -63,9 +64,9 @@ class User extends Authenticatable
         return $this->belongsToMany(Panier::class);
     }
 
-    public function supermarches()
+    public function supermarche()
     {
         return $this->belongsTo(Supermarche::class);
     }
-    
+
 }

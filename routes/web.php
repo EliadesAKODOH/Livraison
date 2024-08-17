@@ -12,6 +12,7 @@ use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\PanierController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\supController;
+use App\Http\Controllers\RoleController;
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
@@ -37,8 +38,15 @@ Route::resource('panier', PanierController::class);
 Route::resource('article', ArticleController::class);
 Route::resource('client', ClientController::class);
 Route::resource('sup', SupController::class);
+Route::resource('role', RoleController::class);
 Route::get('/client',[ProduitController::class, 'clientSide'])->name('client.index');
 Route::get('/images', [App\Http\Controllers\ImageController::class, 'index']);
+
+
+Route::get('/index_admin', [UserController::class, 'index_admin'])->name('user.index_admin');
+Route::get('/index_client', [UserController::class, 'index_client'])->name('user.index_client');
+Route::get('/index_livreur', [UserController::class, 'index_livreur'])->name('user.index_livreur');
+
 
 
 

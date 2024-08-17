@@ -25,5 +25,5 @@ class Categorie extends Model
        return $this->belongsTo(Supermarche::class);
     }
 
-    
+
 }

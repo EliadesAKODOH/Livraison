@@ -1,17 +1,8 @@
 @extends('partials.navbar')
 @section('content')
 <div class="card mt-5">
-    <div class="d-flex justify-content-end mt-5">
-        <a href="{{ route('user.create') }}" class="btn btn-primary">
-            Ajouter Utilisateur
-        </a>
-    </div>
 
-    @if(session('succes'))
-        <div class="alert alert-success">{{ session('succes') }}</div>
-    @endif
-
-    <div class="table-responsive m-3">
+    <div class="table-responsive m-3 mt-5">
         <table class="table table-bordered table-hover table-striped">
             <thead>
                 <tr>
