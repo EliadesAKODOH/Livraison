@@ -15,6 +15,7 @@ class ProduitController extends Controller
      */
     public function index()
     {
+        $produits = Produit::whereActive(true)->get();
         $produits = Produit::with('categorie')->get();
         return view('produit.index', compact('produits'));
     }

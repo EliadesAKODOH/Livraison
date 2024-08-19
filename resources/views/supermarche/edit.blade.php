@@ -1,3 +1,4 @@
+<script async defer src="https://maps.googleapis.com/maps/api/js?key={{ config('services.google_maps.api_key') }}&callback=initMap"></script>
 @extends('partials.navbar')
 @section('content')
 <div class="container mt-5">

@@ -1,3 +1,4 @@
+<script async defer src="https://maps.googleapis.com/maps/api/js?key={{ config('services.google_maps.api_key') }}&callback=initMap"></script>
 @extends('partials.navbar')
 @section('content')
 <div class="card mt-5">
@@ -11,7 +12,6 @@
                     <th>Email</th>
                     <th>Téléphone</th>
                     <th>Adresse</th>
-                    <th>Mot de Passe</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -23,7 +23,6 @@
                     <td>{{ $user->email }}</td>
                     <td>{{ $user->telephone }}</td>
                     <td>{{ $user->adresse }}</td>
-                    <td>{{ $user->password }}</td>
                     <td>
                         <div style="display: flex; gap: 5px;">
                             <a href="{{ route('user.edit', ['user' => $user->id]) }}" title="modifier" class="btn btn-primary"><i class="fas fa-edit"></i></a>

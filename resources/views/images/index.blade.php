@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Images</title>
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key={{ config('services.google_maps.api_key') }}&callback=initMap"></script>
     <style>
         .image-container {
             text-align: center;
