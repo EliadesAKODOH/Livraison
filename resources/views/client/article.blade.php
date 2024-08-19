@@ -706,7 +706,7 @@
                       <a href="#" class="showcase-category">Saucisse</a>
 
                       <h3>
-                        <a href="#" class="showcase-title">Paque de saucisse</a>
+                        <a href="#" class="showcase-title">Paquet de saucisse</a>
                       </h3>
 
 
