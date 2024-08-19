@@ -1,3 +1,4 @@
+<script async defer src="https://maps.googleapis.com/maps/api/js?key={{ config('services.google_maps.api_key') }}&callback=initMap"></script>
 @extends('partials.navbar')
 @section('content')
     <div class="container">
@@ -23,10 +24,6 @@
                         <div class="mb-3">
                             <p class="form-control">Adresse: {{$user->adresse}}</p>
                         </div>
-                        <div class="mb-3">
-                            <p class="form-control">Mot de passe: {{$user->password}}</p>
-                        </div>
-
                     </div>
                 </div>
             </div>

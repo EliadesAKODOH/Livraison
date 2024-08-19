@@ -1,4 +1,4 @@
-@extends("patials.navbar")
+@extends('partials.nav_client')
 @section("content")
 <div class="container">
 

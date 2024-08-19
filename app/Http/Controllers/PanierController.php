@@ -2,60 +2,65 @@
 
 namespace App\Http\Controllers;
 
+use Darryldecode\Cart\Facades\CartFacade as Cart;
+use App\Models\Produit;
+use App\Repositories\PanierInterfaceRepository;
 use Illuminate\Http\Request;
 
 class PanierController extends Controller
 {
     protected $panierRepository;
 
-    public function index()
-    {
-        return view('panier.index');
+    public function __construct(PanierInterfaceRepository $panierRepository) {
+        $this->panierRepository = $panierRepository;
     }
 
-    public function __construct (PanierInterfaceRepository $panierRepository) {
-    	$this->panierRepository = $panierRepository;
-    }
+    // Affichage du panier
+    public function show() {
+    // Récupération du contenu du panier
+    $panier = Cart::getContent();
 
-    # Affichage du panier
-    public function show () {
-    	return view("panier.show"); // resources\views\panier\show.blade.php
-    }
+    // Passage du contenu du panier à la vue
+    return view('panier.show', compact('panier'));
+}
 
-    # Ajout d'un produit au panier
-    public function add (Produit $produit, Request $request) {
+    // Ajout d'un produit au panier
+    public function add(Request $request, $id) {
+        // Validation de la requête
+        $request->validate([
+            'quantite_produit' => 'numeric|min:1'
+        ]);
 
-    	// Validation de la requête
-    	$this->validate($request, [
-    		"quantite_produit" => "numeric|min:1"
-    	]);
+        // Récupération du produit
+        $produit = Produit::findOrFail($id);
 
-    	// Ajout/Mise à jour du produit au panier avec sa quantité
-    	$this->panierRepository->add($produit, $request->quantite_produit);
+        // Ajout/Mise à jour du produit au panier avec sa quantité
+        Cart::add([
+            'id' => $produit->id,
+            'name' => $produit->nom,
+            'price' => $produit->prix,
+            'quantity' => $request->quantite_produit,
+            'attributes' => [],
+        ]);
 
-    	// Redirection vers le panier avec un message
-    	return redirect()->route("panier.show")->withMessage("Produit ajouté au panier");
+        // Redirection vers le panier avec un message
+        return redirect()->route("panier.show")->with('message', 'Produit ajouté au panier');
     }
 
     // Suppression d'un produit du panier
-    public function remove (Product $product) {
+    public function remove($id) {
+        // Suppression du produit du panier par son identifiant
+        Cart::remove($id);
 
-    	// Suppression du produit du panier par son identifiant
-    	$this->panierRepository->remove($produit);
-
-    	// Redirection vers le panier
-    	return back()->withMessage("Produit retiré du panier");
+        // Redirection vers le panier
+        return back()->with('message', 'Produit retiré du panier');
     }
+    // Vider le panier
+    public function empty() {
+        // Suppression des informations du panier en session
+        Cart::clear();
 
-    // Vider la panier
-    public function empty () {
-
-    	// Suppression des informations du panier en session
-    	$this->panierRepository->empty();
-
-    	// Redirection vers le panier
-    	return back()->withMessage("Panier vidé");
-
+        // Redirection vers le panier
+        return back()->with('message', 'Panier vidé');
     }
-
 }

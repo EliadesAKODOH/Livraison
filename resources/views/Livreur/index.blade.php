@@ -1,5 +1,6 @@
 @extends('partials.nav')
 @section('content')
+<script async defer src="https://maps.googleapis.com/maps/api/js?key={{ config('services.google_maps.api_key') }}&callback=initMap"></script>
 
 <div class="d-flex justify-content-end m-2">
 <a href="{{ route('livreur.create') }}" class="btn btn-primary">
