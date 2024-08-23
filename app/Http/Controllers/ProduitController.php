@@ -24,7 +24,6 @@ class ProduitController extends Controller
     {
 
         $produits = Produit::with('categorie')->paginate(9);
-        // produit.belongsTo.alimentaire;
          return view('client.article', compact('produits'));
     }
         // Produits associés uniquement à la catégorie avec l'id 1

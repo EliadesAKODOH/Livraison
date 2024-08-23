@@ -21,7 +21,7 @@
 
                     <div class="showcase">
 
-                        @forelse($alimentaires as $alimentaire)
+                        @forelse($produits as $produit)
                             <div class="showcase-banner">
                                 <img src="{{ asset('storage/'.$produit->image) }}" alt="{{ $produit->nom }}" width="300">
                                 <img src="{{ asset('storage/'.$produit->image) }}" alt="{{ $produit->nom }}" width="300">
@@ -59,7 +59,7 @@
 
                             </div>
                             @empty
-                            <h1 style="color: aqua;">Aucun produit n'est actuellement disponible dans cette catégorie.</h1>
+                            <h1 style="color: rgb(21, 22, 22);">Aucun produit n'est actuellement disponible dans cette catégorie.</h1>
                         @endforelse
                     </div>
 
