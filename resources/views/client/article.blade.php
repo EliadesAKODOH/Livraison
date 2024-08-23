@@ -17,180 +17,51 @@
 
               <div class="product-grid">
 
-                <div class="cat"><h3> Alimentaire</h3>
+                <div class="cat"><h3> {{$produits->categorie->nom}}</h3>
 
-                  <div class="showcase">
+                    <div class="showcase">
 
-                    <div class="showcase-banner">
-                      <img src="./assets/images/produits/alimentaire/riz.jpg" alt="" class="product-img default"
-                        width="300">
-                      <img src="./assets/images/produits/alimentaire/riz.jpg" alt="" class="product-img hover"
-                        width="300">
+                        @forelse($alimentaires as $alimentaire)
+                            <div class="showcase-banner">
+                                <img src="{{ asset('storage/'.$produit->image) }}" alt="{{ $produit->nom }}" width="300">
+                                <img src="{{ asset('storage/'.$produit->image) }}" alt="{{ $produit->nom }}" width="300">
 
-                      <div class="showcase-actions">
-                      <button class="btn-action btn-heart">
-                          <ion-icon name="heart-outline"></ion-icon>
-                        </button>
+                                <div class="showcase-actions">
+                                <button class="btn-action btn-heart">
+                                <ion-icon name="heart-outline"></ion-icon>
+                                </button>
 
-                        <button class="btn-action btn-view">
-                          <ion-icon name="eye-outline"></ion-icon>
-                        </button>
+                                <button class="btn-action btn-view">
+                                <ion-icon name="eye-outline"></ion-icon>
+                                </button>
 
-                        <button class="btn-action btn-repeat">
-                          <ion-icon name="repeat-outline"></ion-icon>
-                        </button>
+                                <button class="btn-action btn-repeat">
+                                <ion-icon name="repeat-outline"></ion-icon>
+                                </button>
 
-                        <button class="btn-action btn-add">
-                          <ion-icon name="bag-add-outline"></ion-icon>
-                        </button>
-                        
-                      </div>
+                                <button class="btn-action btn-add">
+                                <ion-icon name="bag-add-outline"></ion-icon>
+                                </button>
+                                </div>
+                            </div>
+
+                            <div class="showcase-content">
+                             <a href="#" class="showcase-category">{{$produit->nom}}</a>
+
+                             <h3>
+                                <a href="#" class="showcase-title">{{$produit->nom}}</a>
+                             </h3>
+
+
+                             <div class="price-box">
+                                <p class="price">{{$produit->nom}} Fcfa</p>
+                             </div>
+
+                            </div>
+                            @empty
+                            <h1 style="color: aqua;">Aucun produit n'est actuellement disponible dans cette catégorie.</h1>
+                        @endforelse
                     </div>
-
-                    <div class="showcase-content">
-                      <a href="#" class="showcase-category">Riz</a>
-
-                      <h3>
-                        <a href="#" class="showcase-title">Gino 5kg</a>
-                      </h3>
-
-
-                      <div class="price-box">
-                        <p class="price">5000 Fcfa</p>
-                      </div>
-
-                    </div>
-
-                  </div>
-
-                  <div class="showcase">
-
-                    <div class="showcase-banner">
-                      <img src="./assets/images/produits/alimentaire/coqui.jpg" alt="" class="product-img default"
-                        width="300">
-                      <img src="./assets/images/produits/alimentaire/coqui.jpg" alt="" class="product-img hover"
-                        width="300">
-
-                      <div class="showcase-actions">
-                      <button class="btn-action btn-heart">
-                          <ion-icon name="heart-outline"></ion-icon>
-                        </button>
-
-                        <button class="btn-action btn-view">
-                          <ion-icon name="eye-outline"></ion-icon>
-                        </button>
-
-                        <button class="btn-action btn-repeat">
-                          <ion-icon name="repeat-outline"></ion-icon>
-                        </button>
-
-                        <button class="btn-action btn-add">
-                          <ion-icon name="bag-add-outline"></ion-icon>
-                        </button>
-                      </div>
-                    </div>
-
-                    <div class="showcase-content">
-                      <a href="#" class="showcase-category">Coquillete</a>
-
-                      <h3>
-                        <a href="#" class="showcase-title">Panzani 500g</a>
-                      </h3>
-
-
-                      <div class="price-box">
-                        <p class="price">500 Fcfa</p>
-                      </div>
-
-                    </div>
-
-                  </div>
-
-                  <div class="showcase">
-
-                    <div class="showcase-banner">
-                      <img src="./assets/images/produits/alimentaire/spa.jpg" alt="" class="product-img default"
-                        width="300">
-                      <img src="./assets/images/produits/alimentaire/spa.jpg" alt="" class="product-img hover"
-                        width="300">
-
-                      <div class="showcase-actions">
-                      <button class="btn-action btn-heart">
-                          <ion-icon name="heart-outline"></ion-icon>
-                        </button>
-
-                        <button class="btn-action btn-view">
-                          <ion-icon name="eye-outline"></ion-icon>
-                        </button>
-
-                        <button class="btn-action btn-repeat">
-                          <ion-icon name="repeat-outline"></ion-icon>
-                        </button>
-
-                        <button class="btn-action btn-add">
-                          <ion-icon name="bag-add-outline"></ion-icon>
-                        </button>
-                      </div>
-                    </div>
-
-                    <div class="showcase-content">
-                      <a href="#" class="showcase-category">Spaghetti</a>
-
-                      <h3>
-                        <a href="#" class="showcase-title">Elom 500g</a>
-                      </h3>
-
-
-                      <div class="price-box">
-                        <p class="price">500 Fcfa</p>
-                      </div>
-
-                    </div>
-
-                  </div>
-
-                  <div class="showcase">
-
-                  <div class="showcase-banner">
-                    <img src="./assets/images/produits/alimentaire/biscuit.jpg" alt="" class="product-img default"
-                      width="300">
-                    <img src="./assets/images/produits/alimentaire/biscuit.jpg" alt="" class="product-img hover"
-                      width="300">
-
-                    <div class="showcase-actions">
-                    <button class="btn-action btn-heart">
-                          <ion-icon name="heart-outline"></ion-icon>
-                        </button>
-
-                        <button class="btn-action btn-view">
-                          <ion-icon name="eye-outline"></ion-icon>
-                        </button>
-
-                        <button class="btn-action btn-repeat">
-                          <ion-icon name="repeat-outline"></ion-icon>
-                        </button>
-
-                        <button class="btn-action btn-add">
-                          <ion-icon name="bag-add-outline"></ion-icon>
-                        </button>
-                    </div>
-                  </div>
-
-                  <div class="showcase-content">
-                    <a href="#" class="showcase-category">Biscuit</a>
-
-                    <h3>
-                      <a href="#" class="showcase-title">Petit Beurre</a>
-                    </h3>
-
-
-                    <div class="price-box">
-                      <p class="price">2000 Fcfa</p>
-                    </div>
-
-                  </div>
-
-                </div>
 
                 </div>
 
@@ -708,7 +579,7 @@
                       <a href="#" class="showcase-category">Saucisse</a>
 
                       <h3>
-                        <a href="#" class="showcase-title">Paquet de saucisse</a>
+                        <a href="#" class="showcase-title">Paque de saucisse</a>
                       </h3>
 
 

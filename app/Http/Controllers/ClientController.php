@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Produit;
+use App\Models\Categorie;
 
 use Illuminate\Http\Request;
 
@@ -11,7 +13,9 @@ class ClientController extends Controller
      */
     public function index()
     {
-        return view('client.index');
+        // $produits = Produit::whereActive(true)->get();
+        $produits = Produit::with('categorie')->get();
+        return view('client.article', compact('produits'));
     }
 
     /**

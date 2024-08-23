@@ -29,6 +29,7 @@ Route::get('/', function () {
     return view('client.index');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+
 Route::resource('user', UserController::class);
 Route::resource('produit', ProduitController::class);
 Route::resource('supermarche', SupermarcheController::class);
@@ -39,13 +40,14 @@ Route::resource('article', ArticleController::class);
 Route::resource('client', ClientController::class);
 Route::resource('sup', SupController::class);
 Route::resource('role', RoleController::class);
-Route::get('/client',[ProduitController::class, 'clientSide'])->name('client.index');
+Route::get('/client-side', [ProduitController::class, 'clientSide'])->name('client.article');
 Route::get('/images', [App\Http\Controllers\ImageController::class, 'index']);
 Route::delete('/panier/{id}', [PanierController::class, 'remove'])->name('panier.remove');
 Route::delete('/panier/empty', [PanierController::class, 'empty'])->name('panier.empty');
 Route::get('/panier', [PanierController::class, 'show'])->name('panier.show');
 Route::get('/panier/count', [PanierController::class, 'getCartCount'])->name('panier.count');
 Route::get('/panier/show', [PanierController::class, 'showCart'])->name('panier.show');
+
 
 
 

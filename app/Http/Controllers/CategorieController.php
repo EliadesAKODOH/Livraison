@@ -12,7 +12,7 @@ class CategorieController extends Controller
      */
     public function index()
     {
-        $categories=Categorie::all();
+        $categories = Categorie::all();
         return view('categorie.index', compact('categories'));
     }
 
@@ -29,16 +29,26 @@ class CategorieController extends Controller
      */
     public function store(Request $request)
     {
+        // $categoriesCount = Categorie::count();
 
+        // $maxCategories = 4;
+
+        // if ($categoriesCount >= $maxCategories) {
+        //     return redirect()->route('categorie.index')->with('error', 'Vous avez atteint le nombre limite de catégories autorisé actuellement.');
+        // }
+
+        // Valider la demande
         $request->validate([
-           'nom'=>['required'],
-        ]);
-        Categorie::create([
-            'nom'=>$request->nom,
-            'supermarche_id'=> Auth::user()->supermarche_id
+            'nom' => ['required'],
         ]);
 
-      return redirect()->route('categorie.index')->with('succes','Categorie ajouté avec succès');
+        // Créer la nouvelle catégorie
+        Categorie::create([
+            'nom' => $request->nom,
+            'supermarche_id' => Auth::user()->supermarche_id,
+        ]);
+
+        return redirect()->route('categorie.index')->with('success', 'Catégorie ajoutée avec succès');
     }
 
     /**
@@ -48,34 +58,40 @@ class CategorieController extends Controller
     {
         $categorie = Categorie::findOrFail($id);
 
-       return view('categorie.show', compact('categorie'));
+        return view('categorie.show', compact('categorie'));
     }
 
+    /**
+     * Show the form for editing the specified resource.
+     */
     public function edit($id)
-{
-    $categorie = Categorie::find($id);
-    return view('categorie.edit', compact('categorie'));
-}
+    {
+        $categorie = Categorie::find($id);
+        return view('categorie.edit', compact('categorie'));
+    }
 
-public function update(Request $request, $id)
-{
-    $request->validate([
-        'nom' => 'required|string|max:255',
-    ]);
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'nom' => 'required|string|max:255',
+        ]);
 
-    $categorie = Categorie::find($id);
-    $categorie->nom = $request->nom;
-    $categorie->save();
+        $categorie = Categorie::find($id);
+        $categorie->nom = $request->nom;
+        $categorie->save();
 
-    return redirect()->route('categorie.index')->with('success', 'Catégorie mise à jour avec succès');
-}
+        return redirect()->route('categorie.index')->with('success', 'Catégorie mise à jour avec succès');
+    }
+
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Categorie $categorie)
     {
-
         $categorie->delete();
-        return redirect()->route('client.index')->with('succes','Categorie supprimé avec succès');
+        return redirect()->route('categorie.index')->with('success', 'Catégorie supprimée avec succès');
     }
 }

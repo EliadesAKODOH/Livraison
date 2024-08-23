@@ -15,27 +15,39 @@ class ProduitController extends Controller
      */
     public function index()
     {
-        $produits = Produit::whereActive(true)->get();
+        // $produits = Produit::whereActive(true)->get();
         $produits = Produit::with('categorie')->get();
         return view('produit.index', compact('produits'));
     }
 
     public function clientSide()
     {
-        $alimentaires = Produit::whereDoesntHave('categorie', function (Builder $query) {
-            $query->whereIn('id', [2, 3]);
-        })->get();
 
-        $laitiers = Produit::whereDoesntHave('categorie', function (Builder $query) {
-            $query->whereIn('id', [1, 3]);
-        })->get();
-
-        $surgeles = Produit::whereDoesntHave('categorie', function (Builder $query) {
-            $query->whereIn('id', [1, 2]);
-        })->get();
-
-        return view('client.index', compact('alimentaires', 'laitiers', 'surgeles'));
+        $produits = Produit::with('categorie')->paginate(9);
+        // produit.belongsTo.alimentaire;
+         return view('client.article', compact('produits'));
     }
+        // Produits associés uniquement à la catégorie avec l'id 1
+
+    //     $productsInCategory1 = Produit::whereDoesntHave('categorie', function (Builder $query) {
+    //         $query->whereIn('id',[2, 3, 4] );
+    //     })->get();
+    //     dd($request->all());
+
+    //     $productsInCategory2 = Produit::whereDoesntHave('categorie', function (Builder $query) {
+    //         $query->whereIn('id', [1, 3, 4]);
+    //     })->get();
+
+    //     $productsInCategory3 = Produit::whereDoesntHave('categorie', function (Builder $query) {
+    //         $query->whereIn('id', [1, 2, 4]);
+    //     })->get();
+    //     $productsInCategory4 = Produit::whereDoesntHave('categorie', function (Builder $query) {
+    //         $query->whereIn('id', [1, 2, 3]);
+    //     })->get();
+
+    //     return view('client.article', compact('productsInCategory1', 'productsInCategory2', 'productsInCategory3', 'productsInCategory4'));
+    // }
+
 
     /**
      * Montrer le formulaire pour créer une nouvelle ressource.
@@ -74,7 +86,7 @@ class ProduitController extends Controller
 
         ]);
 
-        return redirect()->route('produit.index')->with('succes', 'Produit ajouté avec succès');
+        return redirect()->route('produit.index')->with('success', 'Produit ajouté avec succès');
     }
 
     /**
@@ -116,7 +128,7 @@ class ProduitController extends Controller
     }
 
     $produit->update([
-       'image' => $imagePath,
+    //    'image' => $imagePath,
         'nom' => $request->nom,
         'description' => $request->description,
         'prix' => $request->prix,
@@ -135,6 +147,6 @@ class ProduitController extends Controller
     public function destroy(Produit $produit)
     {
         $produit->delete();
-        return redirect()->route('produit.index')->with('succes', 'Produit supprimé avec succès');
+        return redirect()->route('produit.index')->with('success', 'Produit supprimé avec succès');
     }
 }
